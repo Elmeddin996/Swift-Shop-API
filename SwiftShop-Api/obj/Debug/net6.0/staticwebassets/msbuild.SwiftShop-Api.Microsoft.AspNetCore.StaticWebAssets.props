@@ -1,0 +1,20 @@
+﻿<Project>
+  <ItemGroup>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\sliders\410796d2-9222-475f-a716-58af995381452f144196-8835-4f90-bf25-8eca18ceb7461-1-310x220.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>SwiftShop-Api</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/SwiftShop-Api</BasePath>
+      <RelativePath>uploads/sliders/410796d2-9222-475f-a716-58af995381452f144196-8835-4f90-bf25-8eca18ceb7461-1-310x220.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\sliders\410796d2-9222-475f-a716-58af995381452f144196-8835-4f90-bf25-8eca18ceb7461-1-310x220.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+  </ItemGroup>
+</Project>

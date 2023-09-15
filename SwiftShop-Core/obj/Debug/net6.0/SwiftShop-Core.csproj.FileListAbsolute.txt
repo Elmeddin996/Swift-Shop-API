@@ -34,3 +34,15 @@ C:\Users\User\Swift-Shop-BackEnd\SwiftShop-Core\obj\Debug\net6.0\SwiftShop-Core.
 C:\Users\User\Swift-Shop-BackEnd\SwiftShop-Core\obj\Debug\net6.0\refint\SwiftShop-Core.dll
 C:\Users\User\Swift-Shop-BackEnd\SwiftShop-Core\obj\Debug\net6.0\SwiftShop-Core.pdb
 C:\Users\User\Swift-Shop-BackEnd\SwiftShop-Core\obj\Debug\net6.0\ref\SwiftShop-Core.dll
+C:\Users\User\OneDrive\Desktop\Swift-Shop-BackEnd\SwiftShop-Core\bin\Debug\net6.0\SwiftShop-Core.deps.json
+C:\Users\User\OneDrive\Desktop\Swift-Shop-BackEnd\SwiftShop-Core\bin\Debug\net6.0\SwiftShop-Core.dll
+C:\Users\User\OneDrive\Desktop\Swift-Shop-BackEnd\SwiftShop-Core\bin\Debug\net6.0\SwiftShop-Core.pdb
+C:\Users\User\OneDrive\Desktop\Swift-Shop-BackEnd\SwiftShop-Core\obj\Debug\net6.0\SwiftShop-Core.csproj.AssemblyReference.cache
+C:\Users\User\OneDrive\Desktop\Swift-Shop-BackEnd\SwiftShop-Core\obj\Debug\net6.0\SwiftShop-Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\OneDrive\Desktop\Swift-Shop-BackEnd\SwiftShop-Core\obj\Debug\net6.0\SwiftShop-Core.AssemblyInfoInputs.cache
+C:\Users\User\OneDrive\Desktop\Swift-Shop-BackEnd\SwiftShop-Core\obj\Debug\net6.0\SwiftShop-Core.AssemblyInfo.cs
+C:\Users\User\OneDrive\Desktop\Swift-Shop-BackEnd\SwiftShop-Core\obj\Debug\net6.0\SwiftShop-Core.csproj.CoreCompileInputs.cache
+C:\Users\User\OneDrive\Desktop\Swift-Shop-BackEnd\SwiftShop-Core\obj\Debug\net6.0\SwiftShop-Core.dll
+C:\Users\User\OneDrive\Desktop\Swift-Shop-BackEnd\SwiftShop-Core\obj\Debug\net6.0\refint\SwiftShop-Core.dll
+C:\Users\User\OneDrive\Desktop\Swift-Shop-BackEnd\SwiftShop-Core\obj\Debug\net6.0\SwiftShop-Core.pdb
+C:\Users\User\OneDrive\Desktop\Swift-Shop-BackEnd\SwiftShop-Core\obj\Debug\net6.0\ref\SwiftShop-Core.dll

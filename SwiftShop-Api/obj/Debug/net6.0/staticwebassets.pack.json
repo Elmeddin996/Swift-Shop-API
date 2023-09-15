@@ -1,0 +1,25 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\User\\OneDrive\\Desktop\\Swift-Shop-BackEnd\\SwiftShop-Api\\wwwroot\\uploads\\sliders\\410796d2-9222-475f-a716-58af995381452f144196-8835-4f90-bf25-8eca18ceb7461-1-310x220.jpg",
+      "PackagePath": "staticwebassets\\uploads\\sliders\\410796d2-9222-475f-a716-58af995381452f144196-8835-4f90-bf25-8eca18ceb7461-1-310x220.jpg"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.SwiftShop-Api.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.build.SwiftShop-Api.props",
+      "PackagePath": "build\\SwiftShop-Api.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildMultiTargeting.SwiftShop-Api.props",
+      "PackagePath": "buildMultiTargeting\\SwiftShop-Api.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildTransitive.SwiftShop-Api.props",
+      "PackagePath": "buildTransitive\\SwiftShop-Api.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

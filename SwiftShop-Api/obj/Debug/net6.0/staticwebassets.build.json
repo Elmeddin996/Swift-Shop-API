@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "7CX1OKNzOdTtlc4pcWC0r1BfZa4sTLYEi0jT62Btkgk=",
+  "Hash": "jSatwELuABxBTcuydR6r/t7hAPDs6UQVFg4+N0+8SKc=",
   "Source": "SwiftShop-Api",
   "BasePath": "_content/SwiftShop-Api",
   "Mode": "Default",
@@ -10,10 +10,28 @@
     {
       "Name": "SwiftShop-Api\\wwwroot",
       "Source": "SwiftShop-Api",
-      "ContentRoot": "C:\\Users\\User\\Swift-Shop-BackEnd\\SwiftShop-Api\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\User\\OneDrive\\Desktop\\Swift-Shop-BackEnd\\SwiftShop-Api\\wwwroot\\",
       "BasePath": "_content/SwiftShop-Api",
       "Pattern": "**"
     }
   ],
-  "Assets": []
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\User\\OneDrive\\Desktop\\Swift-Shop-BackEnd\\SwiftShop-Api\\wwwroot\\uploads\\sliders\\410796d2-9222-475f-a716-58af995381452f144196-8835-4f90-bf25-8eca18ceb7461-1-310x220.jpg",
+      "SourceId": "SwiftShop-Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\OneDrive\\Desktop\\Swift-Shop-BackEnd\\SwiftShop-Api\\wwwroot\\",
+      "BasePath": "_content/SwiftShop-Api",
+      "RelativePath": "uploads/sliders/410796d2-9222-475f-a716-58af995381452f144196-8835-4f90-bf25-8eca18ceb7461-1-310x220.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\sliders\\410796d2-9222-475f-a716-58af995381452f144196-8835-4f90-bf25-8eca18ceb7461-1-310x220.jpg"
+    }
+  ]
 }

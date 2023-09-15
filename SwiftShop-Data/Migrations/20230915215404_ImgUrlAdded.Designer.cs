@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SwiftShop_Data;
 
@@ -11,9 +12,10 @@ using SwiftShop_Data;
 namespace SwiftShop_API.Migrations
 {
     [DbContext(typeof(SwiftDbContext))]
-    partial class SwiftDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230915215404_ImgUrlAdded")]
+    partial class ImgUrlAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

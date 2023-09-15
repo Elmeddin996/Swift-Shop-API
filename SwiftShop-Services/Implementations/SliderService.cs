@@ -36,6 +36,8 @@ namespace SwiftShop_Services.Implementations
 
             string rootPath = Directory.GetCurrentDirectory() + "/wwwroot";
             entity.ImageName = FileManager.Save(dto.ImageFile, rootPath, "uploads/sliders");
+            entity.ImageUrl = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "sliders", entity.ImageName);
+
 
             _repository.Add(entity);
             _repository.Commit();
@@ -77,6 +79,7 @@ namespace SwiftShop_Services.Implementations
             {
                 removableFileName = entity.ImageName;
                 entity.ImageName = FileManager.Save(dto.ImageFile, rootPath, "uploads/sliders");
+                entity.ImageUrl = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "sliders", entity.ImageName);
             }
 
             _repository.Commit();

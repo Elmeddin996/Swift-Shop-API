@@ -6,17 +6,15 @@ namespace SwiftShop_Services.Dtos.SliderDto
 {
     public class SliderPutDto
     {
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public IFormFile ImageFile { get; set; }
+        public string? Title { get; set; }
+        public string? Description { get; set; }
+        public IFormFile? ImageFile { get; set; }
     }
 
     public class SliderPutDtoValidator : AbstractValidator<SliderPutDto>
     {
         public SliderPutDtoValidator()
         {
-            RuleFor(x => x.Title).NotEmpty().MaximumLength(15).MinimumLength(2);
-
             RuleFor(x => x).Custom((x, context) =>
             {
                 if (x.ImageFile.Length > 2097152)
