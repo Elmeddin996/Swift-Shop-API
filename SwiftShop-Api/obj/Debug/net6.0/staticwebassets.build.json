@@ -1,0 +1,19 @@
+{
+  "Version": 1,
+  "Hash": "7CX1OKNzOdTtlc4pcWC0r1BfZa4sTLYEi0jT62Btkgk=",
+  "Source": "SwiftShop-Api",
+  "BasePath": "_content/SwiftShop-Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "SwiftShop-Api\\wwwroot",
+      "Source": "SwiftShop-Api",
+      "ContentRoot": "C:\\Users\\User\\Swift-Shop-BackEnd\\SwiftShop-Api\\wwwroot\\",
+      "BasePath": "_content/SwiftShop-Api",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": []
+}
