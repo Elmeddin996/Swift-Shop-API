@@ -4,7 +4,7 @@ using SwiftShop_Core.Models;
 
 namespace SwiftShop_Data.Configurations
 {
-    internal class CategoryConfig : IEntityTypeConfiguration<Category>
+    public class CategoryConfig : IEntityTypeConfiguration<Category>
     {
         public void Configure(EntityTypeBuilder<Category> builder)
         {

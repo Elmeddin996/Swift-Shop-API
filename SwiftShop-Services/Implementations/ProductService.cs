@@ -6,6 +6,7 @@ using SwiftShop_Services.Dtos.ProductDto;
 using SwiftShop_Services.Exceptions;
 using SwiftShop_Services.Helpers;
 using SwiftShop_Services.Interfaces;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace SwiftShop_Services.Implementations
 {
@@ -42,10 +43,11 @@ namespace SwiftShop_Services.Implementations
             var entity = _mapper.Map<Product>(dto);
 
             string rootPath = Directory.GetCurrentDirectory() + "/wwwroot";
-
+            string PostImgName = FileManager.Save(dto.PosterImageFile, rootPath, "uploads/products");
             ProductImage poster = new ProductImage
             {
-                ImageName = FileManager.Save(dto.PosterImageFile, rootPath, "uploads/products"),
+                ImageName = PostImgName,
+                ImageUrl = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "products", PostImgName),
                 PosterStatus = true
             };
 
@@ -53,9 +55,12 @@ namespace SwiftShop_Services.Implementations
 
             foreach (var img in dto.ImageFiles)
             {
+                string imgName = FileManager.Save(img, rootPath, "uploads/products");
+
                 ProductImage image = new ProductImage
                 {
-                    ImageName = FileManager.Save(img, rootPath, "uploads/products"),
+                    ImageName = imgName,
+                    ImageUrl = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "products", imgName),
                     PosterStatus = false
                 };
                 entity.ProductImages.Add(image);
@@ -87,58 +92,81 @@ namespace SwiftShop_Services.Implementations
 
         public void Edit(int id, ProductPutDto dto)
         {
-            var entity = _repository.Get(x => x.Id == id, "ProductImages");
+            var entity = _repository.Get(x => x.Id == id, "ProductImages","Brand","Category");
 
             List<RestExceptionError> errors = new List<RestExceptionError>();
 
-            if (!_repository.IsExist(x => x.Id == dto.CategoryId))
+            if (!_categorieRepo.IsExist(x => x.Id == dto.CategoryId))
                 errors.Add(new RestExceptionError("CategoryId", "CategoryId is not correct"));
 
-            if (!_repository.IsExist(x => x.Id == dto.BrandId))
+            if (!_brandRepo.IsExist(x => x.Id == dto.BrandId))
                 errors.Add(new RestExceptionError("BrandId", "BrandId is not correct"));
-
-
-            if (_repository.IsExist(x => x.Name == dto.Name))
-                errors.Add(new RestExceptionError("Name", "Name is already exists"));
 
             if (errors.Count > 0) throw new RestException(System.Net.HttpStatusCode.BadRequest, errors);
 
-            _repository.Add(_mapper.Map<Product>(dto));
 
-
-            string removableFileName = null;
+            string oldPoster = null;
             string rootPath = Directory.GetCurrentDirectory() + "/wwwroot";
 
             if (dto.PosterImageFile != null)
             {
-                removableFileName = entity.ProductImages.FirstOrDefault(x => x.PosterStatus == true).ImageName;
-                entity.ProductImages.FirstOrDefault(x => x.PosterStatus == true).ImageName = FileManager.Save(dto.PosterImageFile, rootPath, "uploads/flowers");
+                var postImg = entity.ProductImages.FirstOrDefault(x => x.PosterStatus == true);
+                oldPoster = postImg.ImageName;
+                postImg.ImageName = FileManager.Save(dto.PosterImageFile, rootPath, "uploads/products");
+                postImg.ImageUrl= Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "products", postImg.ImageName);
             }
-            if (removableFileName != null) FileManager.Delete(rootPath, "uploads/products", removableFileName);
+
+
+            var removedImages = entity.ProductImages.FindAll(x => x.PosterStatus == false);
+            entity.ProductImages.RemoveAll(x => x.PosterStatus == false);
 
             if (dto.ImageFiles != null)
             {
-                removableFileName = entity.ProductImages.Where(x => x.PosterStatus == false).ToList().ToString();
                 foreach (var img in dto.ImageFiles)
                 {
-                    entity.ProductImages.FirstOrDefault(x => x.PosterStatus == false).ImageName = FileManager.Save(img, rootPath, "uploads/flowers");
-                    if (removableFileName != null) FileManager.Delete(rootPath, "uploads/products", removableFileName);
+                    var imageName = FileManager.Save(img, rootPath, "uploads/products");
+                    ProductImage productImage = new ProductImage()
+                    {
+                        ImageName =imageName, 
+                        ImageUrl = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "products", imageName)
+                    };
+                    entity.ProductImages.Add(productImage);
                 }
+
             }
+
+            entity.CostPrice = dto.CostPrice;
+            entity.SalePrice =dto.SalePrice;
+            entity.DiscountPercent = dto.DiscountPercent;
+            entity.BrandId = dto.BrandId;
+            entity.CategoryId = dto.CategoryId;
+            entity.Name = dto.Name;
+            entity.Description = dto.Description;
+
             _repository.Commit();
+
+
+            if (oldPoster != null) FileManager.Delete(rootPath, "uploads/products", oldPoster);
+
+             foreach (var img in removedImages)
+             {
+                    FileManager.Delete(rootPath, "uploads/products", img.ImageName);
+             }
+            
         }
 
         public List<ProductGetDto> GetAll()
         {
-            var entities = _repository.GetAll(x => true, "FlowerImages");
+            var entities = _repository.GetAll(x => true, "ProductImages");
 
 
             var dtos = _mapper.Map<List<ProductGetDto>>(entities);
 
             foreach (var dto in dtos)
             {
-                var flowerImages = entities.FirstOrDefault(e => e.Id == dto.Id)?.ProductImages;
-                dto.ImageName = flowerImages?.FirstOrDefault()?.ImageName;
+                var productImages = entities.FirstOrDefault(e => e.Id == dto.Id)?.ProductImages;
+                dto.ImageName = productImages?.FirstOrDefault()?.ImageName;
+                dto.ImageUrl = productImages?.FirstOrDefault()?.ImageUrl;
             }
 
 
@@ -147,12 +175,13 @@ namespace SwiftShop_Services.Implementations
 
         public ProductGetByIdDto GetById(int id)
         {
-            var entity = _repository.Get(x => x.Id == id, "FlowerImages", "Categorie");
+            var entity = _repository.Get(x => x.Id == id, "ProductImages", "Category","Brand");
 
-            if (entity == null) throw new RestException(System.Net.HttpStatusCode.NotFound, "Flower not found");
+            if (entity == null) throw new RestException(System.Net.HttpStatusCode.NotFound, "Product not found");
 
             var dto = _mapper.Map<ProductGetByIdDto>(entity);
             dto.ImageNames = entity.ProductImages?.Select(image => image.ImageName).ToList();
+            dto.ImageUrls = entity.ProductImages?.Select(image => image.ImageUrl).ToList();
 
             return dto;
         }

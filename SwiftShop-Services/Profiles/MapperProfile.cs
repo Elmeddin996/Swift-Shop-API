@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using SwiftShop_Core.Models;
+using SwiftShop_Services.Dtos.BasketItemDto;
 using SwiftShop_Services.Dtos.BrandDto;
 using SwiftShop_Services.Dtos.CategoryDto;
 using SwiftShop_Services.Dtos.ProductDto;
@@ -37,6 +38,9 @@ namespace SwiftShop_Services.Profiles
             CreateMap<SliderPutDto, Slider>();
             CreateMap<Slider, SliderGetByIdDto>();
             CreateMap<Slider, SliderGetDto>();
+
+            CreateMap<BasketItemPostDto, BasketItem>();
+            CreateMap<BasketItem, BasketItemGetDto>();
 
         }
     }

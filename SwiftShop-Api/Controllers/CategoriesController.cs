@@ -19,6 +19,20 @@ namespace SwiftShop_API.Controllers
             _service = service;
         }
 
+        [HttpGet("all")]
+        public ActionResult<List<CategoryGetDto>> GetAll()
+        {
+            return Ok(_service.GetAll());
+        }
+
+
+        [HttpGet("{id}")]
+        public ActionResult<CategoryGetByIdDto> Get(int id)
+        {
+            return Ok(_service.GetById(id));
+        }
+
+
         [HttpPost("")]
         public IActionResult Create(CategoryPostDto postDto)
         {
@@ -41,18 +55,6 @@ namespace SwiftShop_API.Controllers
             return NoContent();
         }
 
-        [HttpGet("all")]
-        public ActionResult<List<CategoryGetDto>> GetAll()
-        {
-            return Ok(_service.GetAll());
-        }
-
-
-        [HttpGet("{id}")]
-        public ActionResult<CategoryGetByIdDto> Get(int id)
-        {
-            return Ok(_service.GetById(id));
-        }
-
+       
     }
 }

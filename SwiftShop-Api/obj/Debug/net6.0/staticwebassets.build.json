@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "jSatwELuABxBTcuydR6r/t7hAPDs6UQVFg4+N0+8SKc=",
+  "Hash": "AjlIur9VsGnsXh7PJfP4XhLkKXC8FEr34Z/Hs7JfJ0A=",
   "Source": "SwiftShop-Api",
   "BasePath": "_content/SwiftShop-Api",
   "Mode": "Default",
@@ -17,12 +17,12 @@
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\User\\OneDrive\\Desktop\\Swift-Shop-BackEnd\\SwiftShop-Api\\wwwroot\\uploads\\sliders\\410796d2-9222-475f-a716-58af995381452f144196-8835-4f90-bf25-8eca18ceb7461-1-310x220.jpg",
+      "Identity": "C:\\Users\\User\\OneDrive\\Desktop\\Swift-Shop-BackEnd\\SwiftShop-Api\\wwwroot\\uploads\\products\\1f53f7b5-03a2-4212-bd94-50e4abfdeb241-1-270x300.jpg",
       "SourceId": "SwiftShop-Api",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\User\\OneDrive\\Desktop\\Swift-Shop-BackEnd\\SwiftShop-Api\\wwwroot\\",
       "BasePath": "_content/SwiftShop-Api",
-      "RelativePath": "uploads/sliders/410796d2-9222-475f-a716-58af995381452f144196-8835-4f90-bf25-8eca18ceb7461-1-310x220.jpg",
+      "RelativePath": "uploads/products/1f53f7b5-03a2-4212-bd94-50e4abfdeb241-1-270x300.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -31,7 +31,24 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\uploads\\sliders\\410796d2-9222-475f-a716-58af995381452f144196-8835-4f90-bf25-8eca18ceb7461-1-310x220.jpg"
+      "OriginalItemSpec": "wwwroot\\uploads\\products\\1f53f7b5-03a2-4212-bd94-50e4abfdeb241-1-270x300.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\User\\OneDrive\\Desktop\\Swift-Shop-BackEnd\\SwiftShop-Api\\wwwroot\\uploads\\products\\858d9e8b-571e-4790-813b-4ce6d5033c941-1-570x633.jpg",
+      "SourceId": "SwiftShop-Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\OneDrive\\Desktop\\Swift-Shop-BackEnd\\SwiftShop-Api\\wwwroot\\",
+      "BasePath": "_content/SwiftShop-Api",
+      "RelativePath": "uploads/products/858d9e8b-571e-4790-813b-4ce6d5033c941-1-570x633.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\products\\858d9e8b-571e-4790-813b-4ce6d5033c941-1-570x633.jpg"
     }
   ]
 }

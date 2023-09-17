@@ -16,24 +16,10 @@ namespace SwiftShop_API.Controllers
             _service = service;
         }
 
-        [HttpPost("")]
-        public IActionResult Create([FromForm] SliderPostDto postDto)
-        {
-            return StatusCode(201, _service.Create(postDto));
-        }
-
         [HttpGet("all")]
         public ActionResult<SliderGetDto> GetAll()
         {
             return Ok(_service.GetAll());
-        }
-
-        [HttpPut("{id}")]
-        public ActionResult Update(int id, [FromForm] SliderPutDto dto)
-        {
-            _service.Edit(id, dto);
-
-            return NoContent();
         }
 
         [HttpGet("{id}")]
@@ -43,6 +29,24 @@ namespace SwiftShop_API.Controllers
             return Ok(_service.GetById(id));
         }
 
+
+        [HttpPost("")]
+        public IActionResult Create([FromForm] SliderPostDto postDto)
+        {
+            return StatusCode(201, _service.Create(postDto));
+        }
+
+      
+
+        [HttpPut("{id}")]
+        public ActionResult Update(int id, [FromForm] SliderPutDto dto)
+        {
+            _service.Edit(id, dto);
+
+            return NoContent();
+        }
+
+       
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

@@ -17,6 +17,7 @@ namespace SwiftShop_Data
         public DbSet<ProductImage> ProductImages { get; set; }
         public DbSet<Slider> Sliders { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }
+        public DbSet<BasketItem> BasketItems { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -35,9 +36,19 @@ namespace SwiftShop_Data
            .HasForeignKey(product => product.CategoryId);
 
             modelBuilder.Entity<Product>()
-          .HasOne(product => product.Brand)
-          .WithMany(brand => brand.Products)
-          .HasForeignKey(product => product.BrandId);
+           .HasOne(product => product.Brand)
+           .WithMany(brand => brand.Products)
+           .HasForeignKey(product => product.BrandId);
+
+            modelBuilder.Entity<BasketItem>()
+           .HasOne(item => item.User)
+           .WithMany(user => user.BasketItems)
+           .HasForeignKey(item => item.UserId);
+
+            modelBuilder.Entity<BasketItem>()
+           .HasOne(item => item.Product)
+           .WithMany()
+           .HasForeignKey(item => item.ProductId);
         }
     }
 }

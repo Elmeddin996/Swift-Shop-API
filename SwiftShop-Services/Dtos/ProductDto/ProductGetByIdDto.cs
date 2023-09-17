@@ -10,6 +10,7 @@
         public decimal CostPrice { get; set; }
 
         public List<string> ImageNames { get; set; }
+        public List<string> ImageUrls { get; set; }
         public CategoryInProductDto Category { get; set; }
         public BrandInProductDto Brand { get; set; }
     }

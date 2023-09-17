@@ -8,5 +8,7 @@ namespace SwiftShop_Core.Models
         public string Address { get; set; }
         public bool IsAdmin { get; set; }
         public string Phone { get; set; }
+
+        public ICollection<BasketItem> BasketItems { get; set; }
     }
 }

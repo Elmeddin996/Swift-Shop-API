@@ -16,6 +16,19 @@ namespace SwiftShop_API.Controllers
             _service = service;
         }
 
+        [HttpGet("all")]
+        public ActionResult<List<BrandGetDto>> GetAll()
+        {
+            return Ok(_service.GetAll());
+        }
+
+
+        [HttpGet("{id}")]
+        public ActionResult<BrandGetByIdDto> Get(int id)
+        {
+            return Ok(_service.GetById(id));
+        }
+
         [HttpPost("")]
         public IActionResult Create(BrandPostDto postDto)
         {
@@ -38,18 +51,7 @@ namespace SwiftShop_API.Controllers
             return NoContent();
         }
 
-        [HttpGet("all")]
-        public ActionResult<List<BrandGetDto>> GetAll()
-        {
-            return Ok(_service.GetAll());
-        }
-
-
-        [HttpGet("{id}")]
-        public ActionResult<BrandGetByIdDto> Get(int id)
-        {
-            return Ok(_service.GetById(id));
-        }
+       
 
     }
 }

@@ -4,7 +4,7 @@ using SwiftShop_Core.Models;
 
 namespace SwiftShop_Data.Configurations
 {
-    internal class SliderConfig : IEntityTypeConfiguration<Slider>
+    public class SliderConfig : IEntityTypeConfiguration<Slider>
     {
         public void Configure(EntityTypeBuilder<Slider> builder)
         {

@@ -5,6 +5,7 @@
         public int Id { get; set; }
         public int ProductId { get; set; }
         public string ImageName { get; set; }
+        public string ImageUrl { get; set; }
         public bool PosterStatus { get; set; }
 
         public Product Product { get; set; }

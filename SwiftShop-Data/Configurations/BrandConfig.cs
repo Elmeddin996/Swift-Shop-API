@@ -4,7 +4,7 @@ using SwiftShop_Core.Models;
 
 namespace SwiftShop_Data.Configurations
 {
-    internal class BrandConfig : IEntityTypeConfiguration<Brand>
+    public class BrandConfig : IEntityTypeConfiguration<Brand>
     {
         public void Configure(EntityTypeBuilder<Brand> builder)
         {

@@ -226,6 +226,33 @@ namespace SwiftShop_API.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("SwiftShop_Core.Models.BasketItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("BasketItems");
+                });
+
             modelBuilder.Entity("SwiftShop_Core.Models.Brand", b =>
                 {
                     b.Property<int>("Id")
@@ -312,6 +339,10 @@ namespace SwiftShop_API.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("ImageName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -431,6 +462,25 @@ namespace SwiftShop_API.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("SwiftShop_Core.Models.BasketItem", b =>
+                {
+                    b.HasOne("SwiftShop_Core.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SwiftShop_Core.Models.AppUser", "User")
+                        .WithMany("BasketItems")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("SwiftShop_Core.Models.Product", b =>
                 {
                     b.HasOne("SwiftShop_Core.Models.Brand", "Brand")
@@ -474,6 +524,11 @@ namespace SwiftShop_API.Migrations
             modelBuilder.Entity("SwiftShop_Core.Models.Product", b =>
                 {
                     b.Navigation("ProductImages");
+                });
+
+            modelBuilder.Entity("SwiftShop_Core.Models.AppUser", b =>
+                {
+                    b.Navigation("BasketItems");
                 });
 #pragma warning restore 612, 618
         }
