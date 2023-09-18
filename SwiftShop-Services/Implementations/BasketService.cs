@@ -12,6 +12,7 @@ using SwiftShop_Services.Dtos.BrandDto;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using SwiftShop_Services.Exceptions;
+using Microsoft.AspNetCore.Http;
 
 namespace SwiftShop_Services.Implementations
 {
@@ -19,8 +20,7 @@ namespace SwiftShop_Services.Implementations
     {
         private readonly IBasketRepository _repository;
         private readonly IMapper _mapper;
-
-
+       
         public BasketService(IBasketRepository repository,IMapper mapper)
         {
             _repository = repository;
@@ -30,7 +30,8 @@ namespace SwiftShop_Services.Implementations
 
         public async void  AddToBasket(BasketItemPostDto dto)
         {
-            var entity = _repository.Get(x => x.ProductId == dto.ProductId);
+          
+            var entity = _repository.Get(x=>x.ProductId==dto.ProductId&&x.UserId==dto.UserId,"Product");
 
             if (entity != null)
             {
@@ -40,6 +41,7 @@ namespace SwiftShop_Services.Implementations
             {
                 entity = _mapper.Map<BasketItem>(dto);
                 entity.Count = 1;
+                entity.UserId = dto.UserId;
                 _repository.Add(entity);
             }
             _repository.Commit();
@@ -50,7 +52,7 @@ namespace SwiftShop_Services.Implementations
         {
             List<RestExceptionError> errors = new List<RestExceptionError>();
 
-            var entity = _repository.Get(x => x.ProductId == dto.ProductId);
+            var entity = _repository.Get(x => x.ProductId == dto.ProductId && x.UserId == dto.UserId);
 
             if (entity == null)
                 errors.Add(new RestExceptionError("ProductId", "ProductId is not correct"));
@@ -78,10 +80,9 @@ namespace SwiftShop_Services.Implementations
             _repository.Commit();
         }
 
-        public List<BasketItemGetDto> GetAll()
+        public List<BasketItemGetDto> GetAll(string userId)
         {
-            var entities = _repository.GetAll(x => true, "Product");
-
+            var entities = _repository.GetAll(x =>x.UserId==userId, "Product");
             return _mapper.Map<List<BasketItemGetDto>>(entities);
         }
 

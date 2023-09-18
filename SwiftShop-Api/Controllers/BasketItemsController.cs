@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SwiftShop_Services.Dtos.BasketItemDto;
 using SwiftShop_Services.Interfaces;
@@ -7,6 +8,7 @@ namespace SwiftShop_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class BasketItemsController : ControllerBase
     {
         private readonly IBasketService _service;
@@ -17,9 +19,9 @@ namespace SwiftShop_API.Controllers
         }
 
         [HttpGet("all")]
-        public ActionResult<List<BasketItemGetDto>> GetAll()
+        public ActionResult<List<BasketItemGetDto>> GetAll(string userId)
         {
-            return Ok(_service.GetAll());
+            return Ok(_service.GetAll(userId));
         }
 
         [HttpPost("add")]

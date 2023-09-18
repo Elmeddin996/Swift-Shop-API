@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using SwiftShop_API.Dtos.UserDto;
+using SwiftShop_Services.Dtos.UserDto;
 using SwiftShop_Core.Models;
 using SwiftShop_API.Services;
 using SwiftShop_Services.Exceptions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SwiftShop_API.Controllers
 {
@@ -11,19 +12,42 @@ namespace SwiftShop_API.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-
+        private readonly SignInManager<AppUser> _signInManager;
         private readonly UserManager<AppUser> _userManager;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly JwtService _jwtService;
 
-        public AuthController(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, JwtService jwtService)
+        public AuthController(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager, IHttpContextAccessor httpContextAccessor, RoleManager<IdentityRole> roleManager, JwtService jwtService)
         {
+            _signInManager = signInManager;
             _userManager = userManager;
+            _httpContextAccessor = httpContextAccessor;
             _roleManager = roleManager;
             _jwtService = jwtService;
         }
 
-       
+
+        [HttpGet("UserData")]
+        [Authorize]
+        public async Task<IActionResult> Get()
+        {
+            string userName = User.Identity.Name;
+
+            AppUser user = await _userManager.FindByNameAsync(userName);
+
+            if (user == null) return NotFound();
+
+            UserGetDto dto = new UserGetDto();
+
+            dto.FullName = user.FullName;
+            dto.UserName = user.UserName;
+            dto.Address = user.Address;
+            dto.Phone = user.Phone;
+            dto.Email = user.Email;
+
+            return Ok(dto);
+        }
 
 
         [HttpPost("Register")]
@@ -99,5 +123,24 @@ namespace SwiftShop_API.Controllers
 
         //    return Ok();
         //}
+
+        [HttpGet("Logout")]
+        [Authorize]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+
+            return Ok();
+        }
+
+        [HttpDelete]
+        [Authorize(Roles ="Admin")]
+        public async Task<IActionResult> Delete(string id)
+        {
+           var user = await _userManager.FindByIdAsync(id);
+            await _userManager.DeleteAsync(user);
+
+            return Ok();
+        }
     }
 }

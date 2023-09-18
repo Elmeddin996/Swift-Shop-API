@@ -18,6 +18,7 @@ namespace SwiftShop_Data
         public DbSet<Slider> Sliders { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<BasketItem> BasketItems { get; set; }
+        public DbSet<StoreData> StoreData { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

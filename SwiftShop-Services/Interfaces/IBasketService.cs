@@ -12,7 +12,7 @@ namespace SwiftShop_Services.Interfaces
     {
         void ReduceBasketItem(BasketItemPostDto dto);
         void AddToBasket(BasketItemPostDto dto);
-        List<BasketItemGetDto> GetAll();
+        List<BasketItemGetDto> GetAll(string userId);
         void Delete(int id);
     }
 }

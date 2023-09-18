@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace SwiftShop_API.Dtos.UserDto
+namespace SwiftShop_Services.Dtos.UserDto
 {
     public class UserRegisterDto
     {

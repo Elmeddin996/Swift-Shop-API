@@ -621,6 +621,7 @@
         "dependencies": {
           "AutoMapper": "12.0.1",
           "FluentValidation.AspNetCore": "11.3.0",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.22",
           "SwiftShop-Data": "1.0.0"
         },
         "runtime": {
