@@ -65,10 +65,6 @@ namespace SwiftShop_Services.Implementations
 
             if (entity == null) throw new RestException(System.Net.HttpStatusCode.NotFound, "Slider not found");
 
-            List<RestExceptionError> errors = new List<RestExceptionError>();
-
-            if (errors.Count > 0) throw new RestException(System.Net.HttpStatusCode.BadRequest, errors);
-
             entity.Desc = dto.Description;
             entity.Title = dto.Title;
 

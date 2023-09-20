@@ -13,8 +13,8 @@ namespace SwiftShop_Services.Dtos.StoreDataDto
         public string InstagramLink { get; set; }
         public string FacebookLink { get; set; }
         public string LinkedinLink { get; set; }
-        public IFormFile? LogoImageFile { get; set; }
-        public IFormFile? EmptyBasketImageFile { get; set; }
+        public IFormFile LogoImageFile { get; set; }
+        public IFormFile EmptyBasketImageFile { get; set; }
     }
     
     public class StoreDataPostDtoValidator : AbstractValidator<StoreDataPostDto>

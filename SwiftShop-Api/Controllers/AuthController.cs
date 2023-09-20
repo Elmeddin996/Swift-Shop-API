@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SwiftShop_Services.Dtos.UserDto;
+using SwiftShop_Services.Helpers;
 using SwiftShop_Core.Models;
 using SwiftShop_API.Services;
-using SwiftShop_Services.Exceptions;
 using Microsoft.AspNetCore.Authorization;
 
 namespace SwiftShop_API.Controllers
@@ -17,14 +17,18 @@ namespace SwiftShop_API.Controllers
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly JwtService _jwtService;
+        private readonly IEmailSender _emailSender;
+        private readonly TokenEncoderDecoder _tokenEncDec;
 
-        public AuthController(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager, IHttpContextAccessor httpContextAccessor, RoleManager<IdentityRole> roleManager, JwtService jwtService)
+        public AuthController(SignInManager<AppUser> signInManager,  UserManager<AppUser> userManager, IHttpContextAccessor httpContextAccessor, RoleManager<IdentityRole> roleManager, JwtService jwtService, IEmailSender emailSender, TokenEncoderDecoder tokenEncDec)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _httpContextAccessor = httpContextAccessor;
             _roleManager = roleManager;
             _jwtService = jwtService;
+            _emailSender = emailSender;
+            _tokenEncDec = tokenEncDec;
         }
 
 
@@ -49,6 +53,34 @@ namespace SwiftShop_API.Controllers
             return Ok(dto);
         }
 
+        [HttpGet("AllUsers")]
+        [Authorize(Roles = "Admin")]
+        public IActionResult GetAllUsers()
+        {
+            var users = _userManager.Users;
+
+            if (users == null) return NotFound();
+
+            List<UserGetDto> userDtos = new List<UserGetDto>();
+
+            foreach (var user in users)
+            {
+                UserGetDto dto = new UserGetDto
+                {
+                    FullName = user.FullName,
+                    UserName = user.UserName,
+                    Address = user.Address,
+                    Phone = user.Phone,
+                    Email = user.Email
+                };
+
+                userDtos.Add(dto);
+            }
+
+            return Ok(userDtos);
+        }
+
+
 
         [HttpPost("Register")]
         public async Task<IActionResult> Register(UserRegisterDto registerDto)
@@ -66,18 +98,76 @@ namespace SwiftShop_API.Controllers
                 FullName = registerDto.FullName,
                 Email = registerDto.Email,
                 Address = registerDto.Address,
-                Phone=registerDto.Phone,    
-                IsAdmin=false
+                Phone = registerDto.Phone,
+                IsAdmin = false
             };
 
             var result = await _userManager.CreateAsync(user, registerDto.Password);
             if (result.Succeeded)
-            await _userManager.AddToRoleAsync(user, "Member");
+            {
+                await _userManager.AddToRoleAsync(user, "Member");
+                var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+
+                string encodedToken = _tokenEncDec.EncodeToken(token);
+                string confirmationLink = $"{Request.Scheme}://{Request.Host}/api/auth/confirmemail?encodedToken={encodedToken}&email={user.Email}";
+
+                _emailSender.Send(user.Email, "Email Confirme", $"Click <a href=\"{confirmationLink}\">here</a> to verification your email");
+
+            }
             else
                 return NotFound();
-            
-            
+
+
             return Ok();
+        }
+
+        [HttpGet("SendConfirmEmailToken")]
+        [Authorize]
+        public async Task<IActionResult> CreateToken()
+        {
+            string userName = User.Identity.Name;
+
+            AppUser user = await _userManager.FindByNameAsync(userName);
+
+            if (user == null) return NotFound();
+
+            if (user.EmailConfirmed == true) return Ok("Your Email Alredy Confirmed");
+           
+
+            var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+
+            string encodedToken = _tokenEncDec.EncodeToken(token);
+            string confirmationLink = $"{Request.Scheme}://{Request.Host}/api/auth/confirmemail?encodedToken={encodedToken}&email={user.Email}";
+
+            _emailSender.Send(user.Email, "Email Confirme", $"Click <a href=\"{confirmationLink}\">here</a> to verification your email");
+
+            return Ok();
+        }
+
+        [HttpGet("confirmemail")]
+        public async Task<IActionResult> ConfirmEmail([FromQuery] string encodedToken, [FromQuery] string email)
+        {
+            string token = _tokenEncDec.DecodeToken(encodedToken);
+
+            if (string.IsNullOrWhiteSpace(token) || string.IsNullOrWhiteSpace(email))
+            {
+                return BadRequest("Token and email are required.");
+            }
+
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            var result = await _userManager.ConfirmEmailAsync(user, token);
+            if (result.Succeeded)
+            {
+                //return Redirect($"{Request.Scheme}://{Request.Host}/");
+                return Ok("Email confirmed successfully.");
+            }
+
+            return BadRequest(result.Errors);
         }
 
         [HttpPost("login")]
@@ -133,11 +223,11 @@ namespace SwiftShop_API.Controllers
             return Ok();
         }
 
-        [HttpDelete]
-        [Authorize(Roles ="Admin")]
-        public async Task<IActionResult> Delete(string id)
+        [HttpDelete("DeleteUser")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Delete(string email)
         {
-           var user = await _userManager.FindByIdAsync(id);
+            var user = await _userManager.FindByEmailAsync(email);
             await _userManager.DeleteAsync(user);
 
             return Ok();

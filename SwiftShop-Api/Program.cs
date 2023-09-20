@@ -19,6 +19,7 @@ using Microsoft.OpenApi.Models;
 using SwiftShop_Services.Dtos.CategoryDto;
 using SwiftShop_Services.Profiles;
 using SwiftShop_API.Middlewares;
+using SwiftShop_Services.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -54,13 +55,17 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IBrandRepository, BrandRepository>();
 builder.Services.AddScoped<ISliderRepository, SliderRepository>();
 builder.Services.AddScoped<IBasketRepository, BasketRepository>();
+builder.Services.AddScoped<IStoreDataRepository, StoreDataRepository>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IBrandService, BrandService>();
 builder.Services.AddScoped<ISliderService, SliderService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IBasketService, BasketService>();
+builder.Services.AddScoped<IStoreDataService, StoreDataService>();
 
 builder.Services.AddScoped<JwtService>();
+builder.Services.AddScoped<TokenEncoderDecoder>();
+builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 
 

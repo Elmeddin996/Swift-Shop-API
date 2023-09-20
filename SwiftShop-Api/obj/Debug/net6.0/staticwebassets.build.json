@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "AjlIur9VsGnsXh7PJfP4XhLkKXC8FEr34Z/Hs7JfJ0A=",
+  "Hash": "hegsAXt9JXNaAehTSALy837vIT2HTG2lRTxAEAnmfko=",
   "Source": "SwiftShop-Api",
   "BasePath": "_content/SwiftShop-Api",
   "Mode": "Default",
@@ -49,6 +49,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\products\\858d9e8b-571e-4790-813b-4ce6d5033c941-1-570x633.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\User\\OneDrive\\Desktop\\Swift-Shop-BackEnd\\SwiftShop-Api\\wwwroot\\uploads\\store-datas\\572e029b-0f02-4623-8cf3-2e57d08ab538logo.png",
+      "SourceId": "SwiftShop-Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\OneDrive\\Desktop\\Swift-Shop-BackEnd\\SwiftShop-Api\\wwwroot\\",
+      "BasePath": "_content/SwiftShop-Api",
+      "RelativePath": "uploads/store-datas/572e029b-0f02-4623-8cf3-2e57d08ab538logo.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\store-datas\\572e029b-0f02-4623-8cf3-2e57d08ab538logo.png"
+    },
+    {
+      "Identity": "C:\\Users\\User\\OneDrive\\Desktop\\Swift-Shop-BackEnd\\SwiftShop-Api\\wwwroot\\uploads\\store-datas\\a8997fd9-4532-4009-920d-a5c5e16f46a1emptyCart.png",
+      "SourceId": "SwiftShop-Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\OneDrive\\Desktop\\Swift-Shop-BackEnd\\SwiftShop-Api\\wwwroot\\",
+      "BasePath": "_content/SwiftShop-Api",
+      "RelativePath": "uploads/store-datas/a8997fd9-4532-4009-920d-a5c5e16f46a1emptyCart.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\store-datas\\a8997fd9-4532-4009-920d-a5c5e16f46a1emptyCart.png"
     }
   ]
 }
