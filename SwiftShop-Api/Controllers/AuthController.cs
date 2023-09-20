@@ -5,6 +5,7 @@ using SwiftShop_Services.Helpers;
 using SwiftShop_Core.Models;
 using SwiftShop_API.Services;
 using Microsoft.AspNetCore.Authorization;
+using AutoMapper;
 
 namespace SwiftShop_API.Controllers
 {
@@ -121,54 +122,43 @@ namespace SwiftShop_API.Controllers
             return Ok();
         }
 
-        [HttpGet("SendConfirmEmailToken")]
+        [HttpPut("UserEdit")]
         [Authorize]
-        public async Task<IActionResult> CreateToken()
+        public async Task<IActionResult> Edit(UserPutDto dto)
         {
-            string userName = User.Identity.Name;
+            AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
 
-            AppUser user = await _userManager.FindByNameAsync(userName);
+            user.FullName = dto.FullName;
+            user.Email = dto.Email;
+            user.UserName = dto.UserName;
+            user.Address = dto.Address;
+            user.Phone = dto.Phone;
 
-            if (user == null) return NotFound();
+            var result = await _userManager.UpdateAsync(user);
 
-            if (user.EmailConfirmed == true) return Ok("Your Email Alredy Confirmed");
+                
+            if (result.Succeeded) return Ok("User Data Changed");
+
+
+            return BadRequest();
+        }
+
+        [HttpPut("ChangePassword")]
+        [Authorize]
+        public async Task<IActionResult> ChangePassword(ChangePasswordDto dto)
+        {
+            AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
+
+            if (!await _userManager.CheckPasswordAsync(user, dto.Password)) return BadRequest();
            
+            var newPass = await _userManager.ChangePasswordAsync(user, dto.Password, dto.NewPassword);
 
-            var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-
-            string encodedToken = _tokenEncDec.EncodeToken(token);
-            string confirmationLink = $"{Request.Scheme}://{Request.Host}/api/auth/confirmemail?encodedToken={encodedToken}&email={user.Email}";
-
-            _emailSender.Send(user.Email, "Email Confirme", $"Click <a href=\"{confirmationLink}\">here</a> to verification your email");
+            if (!newPass.Succeeded) return BadRequest();
 
             return Ok();
         }
 
-        [HttpGet("confirmemail")]
-        public async Task<IActionResult> ConfirmEmail([FromQuery] string encodedToken, [FromQuery] string email)
-        {
-            string token = _tokenEncDec.DecodeToken(encodedToken);
-
-            if (string.IsNullOrWhiteSpace(token) || string.IsNullOrWhiteSpace(email))
-            {
-                return BadRequest("Token and email are required.");
-            }
-
-            var user = await _userManager.FindByEmailAsync(email);
-            if (user == null)
-            {
-                return NotFound("User not found.");
-            }
-
-            var result = await _userManager.ConfirmEmailAsync(user, token);
-            if (result.Succeeded)
-            {
-                //return Redirect($"{Request.Scheme}://{Request.Host}/");
-                return Ok("Email confirmed successfully.");
-            }
-
-            return BadRequest(result.Errors);
-        }
+       
 
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserLoginDto loginDto)
@@ -186,6 +176,25 @@ namespace SwiftShop_API.Controllers
             return Ok(_jwtService.GenerateToken(user, roles));
         }
 
+
+        [HttpGet("Logout")]
+        [Authorize]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+
+            return Ok();
+        }
+
+        [HttpDelete("DeleteUser")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Delete(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            await _userManager.DeleteAsync(user);
+
+            return Ok();
+        }
 
         //[HttpGet("Role")]
         //public async Task<IActionResult> CreateRole()
@@ -214,23 +223,5 @@ namespace SwiftShop_API.Controllers
         //    return Ok();
         //}
 
-        [HttpGet("Logout")]
-        [Authorize]
-        public async Task<IActionResult> Logout()
-        {
-            await _signInManager.SignOutAsync();
-
-            return Ok();
-        }
-
-        [HttpDelete("DeleteUser")]
-        [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Delete(string email)
-        {
-            var user = await _userManager.FindByEmailAsync(email);
-            await _userManager.DeleteAsync(user);
-
-            return Ok();
-        }
     }
 }
