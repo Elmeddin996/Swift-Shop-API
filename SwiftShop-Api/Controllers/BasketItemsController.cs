@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using SwiftShop_Core.Models;
 using SwiftShop_Services.Dtos.BasketItemDto;
 using SwiftShop_Services.Interfaces;
 
@@ -12,16 +14,21 @@ namespace SwiftShop_API.Controllers
     public class BasketItemsController : ControllerBase
     {
         private readonly IBasketService _service;
+        private readonly UserManager<AppUser> _userManager;
 
-        public BasketItemsController(IBasketService service)
+        public BasketItemsController(IBasketService service, UserManager<AppUser> userManager)
         {
             _service = service;
+            _userManager = userManager;
         }
 
         [HttpGet("all")]
-        public ActionResult<List<BasketItemGetDto>> GetAll(string userId)
+        [Authorize]
+        public async Task<IActionResult> GetAll()
         {
-            return Ok(_service.GetAll(userId));
+            AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
+
+            return Ok(_service.GetAll(user.Id));
         }
 
         [HttpPost("add")]

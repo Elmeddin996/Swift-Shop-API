@@ -7,7 +7,8 @@
         public string CategoryId { get; set; }
         public string BrandId { get; set; }
         public decimal SalePrice { get; set; }
-        public decimal CostPrice { get; set; }
+        public decimal DiscountPercent { get; set; }
+
 
         public List<string> ImageNames { get; set; }
         public List<string> ImageUrls { get; set; }

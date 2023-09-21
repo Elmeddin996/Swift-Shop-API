@@ -50,7 +50,7 @@ namespace SwiftShop_Services.Implementations
             ProductImage poster = new ProductImage
             {
                 ImageName = PostImgName,
-                ImageUrl = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "products", PostImgName),
+                ImageUrl = "/uploads/products/"+ PostImgName,
                 PosterStatus = true
             };
 
@@ -63,7 +63,7 @@ namespace SwiftShop_Services.Implementations
                 ProductImage image = new ProductImage
                 {
                     ImageName = imgName,
-                    ImageUrl = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "products", imgName),
+                    ImageUrl = "/uploads/products/"+ imgName,
                     PosterStatus = false
                 };
                 entity.ProductImages.Add(image);
@@ -116,7 +116,7 @@ namespace SwiftShop_Services.Implementations
                 var postImg = entity.ProductImages.FirstOrDefault(x => x.PosterStatus == true);
                 oldPoster = postImg.ImageName;
                 postImg.ImageName = FileManager.Save(dto.PosterImageFile, rootPath, "uploads/products");
-                postImg.ImageUrl= Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "products", postImg.ImageName);
+                postImg.ImageUrl= "/uploads/products/"+ postImg.ImageName;
             }
 
 
@@ -131,7 +131,7 @@ namespace SwiftShop_Services.Implementations
                     ProductImage productImage = new ProductImage()
                     {
                         ImageName =imageName, 
-                        ImageUrl = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "products", imageName)
+                        ImageUrl = "/uploads/products/" + imageName
                     };
                     entity.ProductImages.Add(productImage);
                 }
@@ -160,7 +160,7 @@ namespace SwiftShop_Services.Implementations
 
         public List<ProductGetDto> GetAll()
         {
-            var entities = _repository.GetAll(x => true, "ProductImages");
+            var entities = _repository.GetAll(x => true, "ProductImages","Brand","Category");
 
 
             var dtos = _mapper.Map<List<ProductGetDto>>(entities);
@@ -168,8 +168,11 @@ namespace SwiftShop_Services.Implementations
             foreach (var dto in dtos)
             {
                 var productImages = entities.FirstOrDefault(e => e.Id == dto.Id)?.ProductImages;
+
+                string baseUrl = $"{_httpContextAccessor.HttpContext.Request.Scheme}://{_httpContextAccessor.HttpContext.Request.Host}";
+
                 dto.ImageName = productImages?.FirstOrDefault()?.ImageName;
-                dto.ImageUrl = productImages?.FirstOrDefault()?.ImageUrl;
+                dto.ImageUrl = baseUrl + productImages?.FirstOrDefault()?.ImageUrl;
             }
 
 
@@ -183,8 +186,9 @@ namespace SwiftShop_Services.Implementations
             if (entity == null) throw new RestException(System.Net.HttpStatusCode.NotFound, "Product not found");
 
             var dto = _mapper.Map<ProductGetByIdDto>(entity);
+            string baseUrl = $"{_httpContextAccessor.HttpContext.Request.Scheme}://{_httpContextAccessor.HttpContext.Request.Host}";
             dto.ImageNames = entity.ProductImages?.Select(image => image.ImageName).ToList();
-            dto.ImageUrls = entity.ProductImages?.Select(image => image.ImageUrl).ToList();
+            dto.ImageUrls = entity.ProductImages?.Select(image =>baseUrl+ image.ImageUrl).ToList();
 
             return dto;
         }

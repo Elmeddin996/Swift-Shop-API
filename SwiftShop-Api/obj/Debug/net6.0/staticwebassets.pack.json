@@ -1,12 +1,20 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\User\\OneDrive\\Desktop\\Swift-Shop-BackEnd\\SwiftShop-Api\\wwwroot\\uploads\\products\\1f53f7b5-03a2-4212-bd94-50e4abfdeb241-1-270x300.jpg",
-      "PackagePath": "staticwebassets\\uploads\\products\\1f53f7b5-03a2-4212-bd94-50e4abfdeb241-1-270x300.jpg"
+      "Id": "C:\\Users\\User\\OneDrive\\Desktop\\Swift-Shop-BackEnd\\SwiftShop-Api\\wwwroot\\uploads\\products\\4bbddf9e-4e36-449f-9097-21bad38e618aproduct-1.jpg",
+      "PackagePath": "staticwebassets\\uploads\\products\\4bbddf9e-4e36-449f-9097-21bad38e618aproduct-1.jpg"
     },
     {
-      "Id": "C:\\Users\\User\\OneDrive\\Desktop\\Swift-Shop-BackEnd\\SwiftShop-Api\\wwwroot\\uploads\\products\\858d9e8b-571e-4790-813b-4ce6d5033c941-1-570x633.jpg",
-      "PackagePath": "staticwebassets\\uploads\\products\\858d9e8b-571e-4790-813b-4ce6d5033c941-1-570x633.jpg"
+      "Id": "C:\\Users\\User\\OneDrive\\Desktop\\Swift-Shop-BackEnd\\SwiftShop-Api\\wwwroot\\uploads\\products\\580f41c2-1d42-481e-b7c0-9e7ca4e246d3cart-product-1.jpg",
+      "PackagePath": "staticwebassets\\uploads\\products\\580f41c2-1d42-481e-b7c0-9e7ca4e246d3cart-product-1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\User\\OneDrive\\Desktop\\Swift-Shop-BackEnd\\SwiftShop-Api\\wwwroot\\uploads\\products\\d55a7d09-8f2d-40a7-87a8-0889d5d1d7b8product-3.jpg",
+      "PackagePath": "staticwebassets\\uploads\\products\\d55a7d09-8f2d-40a7-87a8-0889d5d1d7b8product-3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\User\\OneDrive\\Desktop\\Swift-Shop-BackEnd\\SwiftShop-Api\\wwwroot\\uploads\\products\\e9a23740-ad6f-4e7e-b502-6d31e1ac963eproduct-2.jpg",
+      "PackagePath": "staticwebassets\\uploads\\products\\e9a23740-ad6f-4e7e-b502-6d31e1ac963eproduct-2.jpg"
     },
     {
       "Id": "C:\\Users\\User\\OneDrive\\Desktop\\Swift-Shop-BackEnd\\SwiftShop-Api\\wwwroot\\uploads\\sliders\\a7e74162-4c59-4eff-9bfb-8212770e1364emptyCart.png",
@@ -17,12 +25,12 @@
       "PackagePath": "staticwebassets\\uploads\\sliders\\c786e16f-8e4f-4c95-995a-327bdc9f3acalogo.png"
     },
     {
-      "Id": "C:\\Users\\User\\OneDrive\\Desktop\\Swift-Shop-BackEnd\\SwiftShop-Api\\wwwroot\\uploads\\store-datas\\0aa5277f-b31a-47ac-9e34-4c7773792410logo.png",
-      "PackagePath": "staticwebassets\\uploads\\store-datas\\0aa5277f-b31a-47ac-9e34-4c7773792410logo.png"
+      "Id": "C:\\Users\\User\\OneDrive\\Desktop\\Swift-Shop-BackEnd\\SwiftShop-Api\\wwwroot\\uploads\\store-datas\\3eb0c0c2-ab58-47bc-ba50-46ea7558262clogo.png",
+      "PackagePath": "staticwebassets\\uploads\\store-datas\\3eb0c0c2-ab58-47bc-ba50-46ea7558262clogo.png"
     },
     {
-      "Id": "C:\\Users\\User\\OneDrive\\Desktop\\Swift-Shop-BackEnd\\SwiftShop-Api\\wwwroot\\uploads\\store-datas\\f7a1d956-c156-407a-a994-04e23625e27bemptyCart.png",
-      "PackagePath": "staticwebassets\\uploads\\store-datas\\f7a1d956-c156-407a-a994-04e23625e27bemptyCart.png"
+      "Id": "C:\\Users\\User\\OneDrive\\Desktop\\Swift-Shop-BackEnd\\SwiftShop-Api\\wwwroot\\uploads\\store-datas\\a0bafb9b-2f47-4262-9dc5-b11d9041800eemptyCart.png",
+      "PackagePath": "staticwebassets\\uploads\\store-datas\\a0bafb9b-2f47-4262-9dc5-b11d9041800eemptyCart.png"
     },
     {
       "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.SwiftShop-Api.Microsoft.AspNetCore.StaticWebAssets.props",

@@ -1,11 +1,11 @@
 ﻿<Project>
   <ItemGroup>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\products\1f53f7b5-03a2-4212-bd94-50e4abfdeb241-1-270x300.jpg))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\products\4bbddf9e-4e36-449f-9097-21bad38e618aproduct-1.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>SwiftShop-Api</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/SwiftShop-Api</BasePath>
-      <RelativePath>uploads/products/1f53f7b5-03a2-4212-bd94-50e4abfdeb241-1-270x300.jpg</RelativePath>
+      <RelativePath>uploads/products/4bbddf9e-4e36-449f-9097-21bad38e618aproduct-1.jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -14,14 +14,14 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\products\1f53f7b5-03a2-4212-bd94-50e4abfdeb241-1-270x300.jpg))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\products\4bbddf9e-4e36-449f-9097-21bad38e618aproduct-1.jpg))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\products\858d9e8b-571e-4790-813b-4ce6d5033c941-1-570x633.jpg))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\products\580f41c2-1d42-481e-b7c0-9e7ca4e246d3cart-product-1.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>SwiftShop-Api</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/SwiftShop-Api</BasePath>
-      <RelativePath>uploads/products/858d9e8b-571e-4790-813b-4ce6d5033c941-1-570x633.jpg</RelativePath>
+      <RelativePath>uploads/products/580f41c2-1d42-481e-b7c0-9e7ca4e246d3cart-product-1.jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -30,7 +30,39 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\products\858d9e8b-571e-4790-813b-4ce6d5033c941-1-570x633.jpg))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\products\580f41c2-1d42-481e-b7c0-9e7ca4e246d3cart-product-1.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\products\d55a7d09-8f2d-40a7-87a8-0889d5d1d7b8product-3.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>SwiftShop-Api</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/SwiftShop-Api</BasePath>
+      <RelativePath>uploads/products/d55a7d09-8f2d-40a7-87a8-0889d5d1d7b8product-3.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\products\d55a7d09-8f2d-40a7-87a8-0889d5d1d7b8product-3.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\products\e9a23740-ad6f-4e7e-b502-6d31e1ac963eproduct-2.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>SwiftShop-Api</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/SwiftShop-Api</BasePath>
+      <RelativePath>uploads/products/e9a23740-ad6f-4e7e-b502-6d31e1ac963eproduct-2.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\products\e9a23740-ad6f-4e7e-b502-6d31e1ac963eproduct-2.jpg))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\sliders\a7e74162-4c59-4eff-9bfb-8212770e1364emptyCart.png))">
       <SourceType>Package</SourceType>
@@ -64,12 +96,12 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\sliders\c786e16f-8e4f-4c95-995a-327bdc9f3acalogo.png))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\store-datas\0aa5277f-b31a-47ac-9e34-4c7773792410logo.png))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\store-datas\3eb0c0c2-ab58-47bc-ba50-46ea7558262clogo.png))">
       <SourceType>Package</SourceType>
       <SourceId>SwiftShop-Api</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/SwiftShop-Api</BasePath>
-      <RelativePath>uploads/store-datas/0aa5277f-b31a-47ac-9e34-4c7773792410logo.png</RelativePath>
+      <RelativePath>uploads/store-datas/3eb0c0c2-ab58-47bc-ba50-46ea7558262clogo.png</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -78,14 +110,14 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\store-datas\0aa5277f-b31a-47ac-9e34-4c7773792410logo.png))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\store-datas\3eb0c0c2-ab58-47bc-ba50-46ea7558262clogo.png))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\store-datas\f7a1d956-c156-407a-a994-04e23625e27bemptyCart.png))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\store-datas\a0bafb9b-2f47-4262-9dc5-b11d9041800eemptyCart.png))">
       <SourceType>Package</SourceType>
       <SourceId>SwiftShop-Api</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/SwiftShop-Api</BasePath>
-      <RelativePath>uploads/store-datas/f7a1d956-c156-407a-a994-04e23625e27bemptyCart.png</RelativePath>
+      <RelativePath>uploads/store-datas/a0bafb9b-2f47-4262-9dc5-b11d9041800eemptyCart.png</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -94,7 +126,7 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\store-datas\f7a1d956-c156-407a-a994-04e23625e27bemptyCart.png))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\store-datas\a0bafb9b-2f47-4262-9dc5-b11d9041800eemptyCart.png))</OriginalItemSpec>
     </StaticWebAsset>
   </ItemGroup>
 </Project>

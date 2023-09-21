@@ -158,7 +158,7 @@ namespace SwiftShop_API.Controllers
             return Ok();
         }
 
-       
+
 
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserLoginDto loginDto)
@@ -173,7 +173,14 @@ namespace SwiftShop_API.Controllers
 
             var roles = await _userManager.GetRolesAsync(user);
 
-            return Ok(_jwtService.GenerateToken(user, roles));
+            var responseData = new
+            {
+                token = _jwtService.GenerateToken(user, roles),
+                userId=user.Id
+            };
+           
+
+            return Ok(responseData);
         }
 
 

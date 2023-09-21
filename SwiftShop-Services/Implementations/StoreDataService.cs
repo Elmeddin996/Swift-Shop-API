@@ -33,7 +33,7 @@ namespace SwiftShop_Services.Implementations
 
             string rootPath = Directory.GetCurrentDirectory() + "/wwwroot";
             entity.LogoImageName = FileManager.Save(dto.LogoImageFile, rootPath, "uploads/store-datas");
-            entity.LogoImageLink = "uploads/store-datas/" + entity.LogoImageName;
+            entity.LogoImageLink = "/uploads/store-datas/" + entity.LogoImageName;
             entity.EmptyBasketImageName = FileManager.Save(dto.EmptyBasketImageFile, rootPath, "uploads/store-datas");
             entity.EmptyBasketImageLink = "/uploads/store-datas/"+ entity.EmptyBasketImageName;
 
