@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using SwiftShop_Core.Models;
 using SwiftShop_Core.Repositories;
 using SwiftShop_Services.Dtos.Common;
@@ -16,13 +17,15 @@ namespace SwiftShop_Services.Implementations
         private readonly IMapper _mapper;
         private readonly IBrandRepository _brandRepo;
         private readonly ICategoryRepository _categorieRepo;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public ProductService(IProductRepository repository, IMapper mapper, IBrandRepository brandRepo, ICategoryRepository categorieRepo)
+        public ProductService(IProductRepository repository, IMapper mapper, IBrandRepository brandRepo, ICategoryRepository categorieRepo, IHttpContextAccessor httpContextAccessor)
         {
             _repository = repository;
             _mapper = mapper;
             _brandRepo = brandRepo;
             _categorieRepo = categorieRepo;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public CreateEntityDto Create(ProductPostDto dto)

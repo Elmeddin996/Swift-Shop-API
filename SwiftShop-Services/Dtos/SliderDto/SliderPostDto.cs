@@ -7,7 +7,7 @@ namespace SwiftShop_Services.Dtos.SliderDto
     public class SliderPostDto
     {
         public string Title { get; set; }
-        public string Description { get; set; }
+        public string Desc { get; set; }
         public IFormFile ImageFile { get; set; }
     }
 

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using SwiftShop_Core.Models;
 using SwiftShop_Core.Repositories;
 using SwiftShop_Services.Dtos.Common;
@@ -14,12 +15,13 @@ namespace SwiftShop_Services.Implementations
     {
         private readonly ISliderRepository _repository;
         private readonly IMapper _mapper;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public SliderService(ISliderRepository repository, IMapper mapper)
+        public SliderService(ISliderRepository repository, IMapper mapper, IHttpContextAccessor httpContextAccessor)
         {
             _repository = repository;
             _mapper = mapper;
-           
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public CreateEntityDto Create(SliderPostDto dto)
@@ -36,7 +38,7 @@ namespace SwiftShop_Services.Implementations
 
             string rootPath = Directory.GetCurrentDirectory() + "/wwwroot";
             entity.ImageName = FileManager.Save(dto.ImageFile, rootPath, "uploads/sliders");
-            entity.ImageUrl = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "sliders", entity.ImageName);
+            entity.ImageUrl = "/uploads/sliders/" + entity.ImageName;
 
 
             _repository.Add(entity);
@@ -65,7 +67,7 @@ namespace SwiftShop_Services.Implementations
 
             if (entity == null) throw new RestException(System.Net.HttpStatusCode.NotFound, "Slider not found");
 
-            entity.Desc = dto.Description;
+            entity.Desc = dto.Desc;
             entity.Title = dto.Title;
 
             string? removableFileName = null;
@@ -75,7 +77,7 @@ namespace SwiftShop_Services.Implementations
             {
                 removableFileName = entity.ImageName;
                 entity.ImageName = FileManager.Save(dto.ImageFile, rootPath, "uploads/sliders");
-                entity.ImageUrl = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "sliders", entity.ImageName);
+                entity.ImageUrl = "/uploads/sliders/" + entity.ImageName;
             }
 
             _repository.Commit();
@@ -87,6 +89,13 @@ namespace SwiftShop_Services.Implementations
         {
             var entities = _repository.GetAll(x => true);
 
+           
+            string baseUrl = $"{_httpContextAccessor.HttpContext.Request.Scheme}://{_httpContextAccessor.HttpContext.Request.Host}";
+            foreach (var entity in entities)
+            {
+                entity.ImageUrl = baseUrl + entity.ImageUrl;
+            }
+
             return _mapper.Map<List<SliderGetDto>>(entities);
         }
 
@@ -95,6 +104,10 @@ namespace SwiftShop_Services.Implementations
             var entity = _repository.Get(x => x.Id == id);
 
             if (entity == null) throw new RestException(System.Net.HttpStatusCode.NotFound, "Slider", "Slider not found");
+
+            string baseUrl = $"{_httpContextAccessor.HttpContext.Request.Scheme}://{_httpContextAccessor.HttpContext.Request.Host}";
+
+            entity.ImageUrl = baseUrl + entity.ImageUrl;
 
             return _mapper.Map<SliderGetByIdDto>(entity);
         }

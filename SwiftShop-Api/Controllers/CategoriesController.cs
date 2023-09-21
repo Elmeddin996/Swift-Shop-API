@@ -7,7 +7,6 @@ using System.Data;
 
 namespace SwiftShop_API.Controllers
 {
-    [Authorize(Roles = "Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class CategoriesController : ControllerBase
@@ -34,6 +33,7 @@ namespace SwiftShop_API.Controllers
 
 
         [HttpPost("")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create(CategoryPostDto postDto)
         {
             var result = _service.Create(postDto);
@@ -42,6 +42,7 @@ namespace SwiftShop_API.Controllers
 
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(int id, CategoryPutDto putDto)
         {
             _service.Edit(id, putDto);
@@ -49,6 +50,7 @@ namespace SwiftShop_API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(int id)
         {
             _service.Delete(id);

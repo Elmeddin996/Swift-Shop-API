@@ -42,7 +42,7 @@ namespace SwiftShop_API.Controllers
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 
             string encodedToken = _tokenEncDec.EncodeToken(token);
-            string confirmationLink = $"{Request.Scheme}://{Request.Host}/api/auth/confirmemail?encodedToken={encodedToken}&email={user.Email}";
+            string confirmationLink = $"{Request.Scheme}://{Request.Host}/api/accounts/confirmemail?encodedToken={encodedToken}&email={user.Email}";
 
             _emailSender.Send(user.Email, "Email Confirme", $"Click <a href=\"{confirmationLink}\">here</a> to verification your email");
 
@@ -85,7 +85,7 @@ namespace SwiftShop_API.Controllers
             string token = await _userManager.GeneratePasswordResetTokenAsync(user);
 
             string encodedToken = _tokenEncDec.EncodeToken(token);
-            string resetPasswordUrl = $"{Request.Scheme}://{Request.Host}/api/auth/resetpassword?encodedToken={encodedToken}&email={passwordDto.Email}";
+            string resetPasswordUrl = $"{Request.Scheme}://{Request.Host}/api/accounts/resetpassword?encodedToken={encodedToken}&email={passwordDto.Email}";
 
             _emailSender.Send(passwordDto.Email, "Reset Password", $"Click <a href=\"{resetPasswordUrl}\">here</a> to reset your password");
 

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using SwiftShop_Core.Models;
 using SwiftShop_Core.Repositories;
 using SwiftShop_Services.Dtos.Common;
@@ -18,11 +19,13 @@ namespace SwiftShop_Services.Implementations
     {
         private readonly IStoreDataRepository _repository;
         private readonly IMapper _mapper;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public StoreDataService(IStoreDataRepository repository, IMapper mapper)
+        public StoreDataService(IStoreDataRepository repository, IMapper mapper, IHttpContextAccessor httpContextAccessor)
         {
             _repository = repository;
             _mapper = mapper;
+            _httpContextAccessor = httpContextAccessor;
         }
         public CreateEntityDto Create(StoreDataPostDto dto)
         {
@@ -30,9 +33,9 @@ namespace SwiftShop_Services.Implementations
 
             string rootPath = Directory.GetCurrentDirectory() + "/wwwroot";
             entity.LogoImageName = FileManager.Save(dto.LogoImageFile, rootPath, "uploads/store-datas");
-            entity.LogoImageLink = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "store-datas", entity.LogoImageName);
+            entity.LogoImageLink = "uploads/store-datas/" + entity.LogoImageName;
             entity.EmptyBasketImageName = FileManager.Save(dto.EmptyBasketImageFile, rootPath, "uploads/store-datas");
-            entity.EmptyBasketImageLink = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "store-datas", entity.EmptyBasketImageName);
+            entity.EmptyBasketImageLink = "/uploads/store-datas/"+ entity.EmptyBasketImageName;
 
 
             _repository.Add(entity);
@@ -46,15 +49,6 @@ namespace SwiftShop_Services.Implementations
             var entity = _repository.Get(x => true);
 
             if (entity == null) throw new RestException(System.Net.HttpStatusCode.NotFound, "Store Data not found");
-
-            //entity.Phone = dto.Phone;
-            //entity.Address = dto.Address;
-            //entity.CompanyName = dto.CompanyName;
-            //entity.LogoText = dto.LogoText;
-            //entity.WhatsappLink = dto.WhatsappLink;
-            //entity.FacebookLink = dto.FacebookLink;
-            //entity.InstagramLink = dto.InstagramLink;
-            //entity.LinkedinLink = dto.LinkedinLink;
 
             var dtoProperties = dto.GetType().GetProperties();
             var entityProperties = entity.GetType().GetProperties();
@@ -81,14 +75,14 @@ namespace SwiftShop_Services.Implementations
             {
               oldLogoImgName = entity.LogoImageName;
               entity.LogoImageName = FileManager.Save(dto.LogoImageFile, rootPath, "uploads/store-datas");
-              entity.LogoImageLink = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "store-datas", entity.LogoImageName);
+              entity.LogoImageLink = "/uploads/store-datas/" + entity.LogoImageName;
             }
 
             if(dto.EmptyBasketImageFile!=null)
             {
               oldEmptyBasketImgName = entity.EmptyBasketImageName;
               entity.EmptyBasketImageName = FileManager.Save(dto.EmptyBasketImageFile, rootPath, "uploads/store-datas");
-              entity.EmptyBasketImageLink = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "store-datas", entity.EmptyBasketImageName);
+              entity.EmptyBasketImageLink = "/uploads/store-datas/" + entity.EmptyBasketImageName;
             }
             _repository.Commit();
 
@@ -99,6 +93,10 @@ namespace SwiftShop_Services.Implementations
         public StoreDataGetDto Get()
         {
             var entity = _repository.Get(x => true);
+            string baseUrl = $"{_httpContextAccessor.HttpContext.Request.Scheme}://{_httpContextAccessor.HttpContext.Request.Host}";
+
+            entity.EmptyBasketImageLink = baseUrl + entity.EmptyBasketImageLink;
+            entity.LogoImageLink = baseUrl + entity.LogoImageLink;
             return _mapper.Map<StoreDataGetDto>(entity);
 
         }

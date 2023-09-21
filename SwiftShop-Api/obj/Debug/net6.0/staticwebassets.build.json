@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "hegsAXt9JXNaAehTSALy837vIT2HTG2lRTxAEAnmfko=",
+  "Hash": "J8H65LKokKp6hNXsZ4QbSOaF5dr+FF4M2E+Y7Q393Qk=",
   "Source": "SwiftShop-Api",
   "BasePath": "_content/SwiftShop-Api",
   "Mode": "Default",
@@ -51,12 +51,12 @@
       "OriginalItemSpec": "wwwroot\\uploads\\products\\858d9e8b-571e-4790-813b-4ce6d5033c941-1-570x633.jpg"
     },
     {
-      "Identity": "C:\\Users\\User\\OneDrive\\Desktop\\Swift-Shop-BackEnd\\SwiftShop-Api\\wwwroot\\uploads\\store-datas\\572e029b-0f02-4623-8cf3-2e57d08ab538logo.png",
+      "Identity": "C:\\Users\\User\\OneDrive\\Desktop\\Swift-Shop-BackEnd\\SwiftShop-Api\\wwwroot\\uploads\\sliders\\a7e74162-4c59-4eff-9bfb-8212770e1364emptyCart.png",
       "SourceId": "SwiftShop-Api",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\User\\OneDrive\\Desktop\\Swift-Shop-BackEnd\\SwiftShop-Api\\wwwroot\\",
       "BasePath": "_content/SwiftShop-Api",
-      "RelativePath": "uploads/store-datas/572e029b-0f02-4623-8cf3-2e57d08ab538logo.png",
+      "RelativePath": "uploads/sliders/a7e74162-4c59-4eff-9bfb-8212770e1364emptyCart.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -65,15 +65,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\uploads\\store-datas\\572e029b-0f02-4623-8cf3-2e57d08ab538logo.png"
+      "OriginalItemSpec": "wwwroot\\uploads\\sliders\\a7e74162-4c59-4eff-9bfb-8212770e1364emptyCart.png"
     },
     {
-      "Identity": "C:\\Users\\User\\OneDrive\\Desktop\\Swift-Shop-BackEnd\\SwiftShop-Api\\wwwroot\\uploads\\store-datas\\a8997fd9-4532-4009-920d-a5c5e16f46a1emptyCart.png",
+      "Identity": "C:\\Users\\User\\OneDrive\\Desktop\\Swift-Shop-BackEnd\\SwiftShop-Api\\wwwroot\\uploads\\sliders\\c786e16f-8e4f-4c95-995a-327bdc9f3acalogo.png",
       "SourceId": "SwiftShop-Api",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\User\\OneDrive\\Desktop\\Swift-Shop-BackEnd\\SwiftShop-Api\\wwwroot\\",
       "BasePath": "_content/SwiftShop-Api",
-      "RelativePath": "uploads/store-datas/a8997fd9-4532-4009-920d-a5c5e16f46a1emptyCart.png",
+      "RelativePath": "uploads/sliders/c786e16f-8e4f-4c95-995a-327bdc9f3acalogo.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -82,7 +82,41 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\uploads\\store-datas\\a8997fd9-4532-4009-920d-a5c5e16f46a1emptyCart.png"
+      "OriginalItemSpec": "wwwroot\\uploads\\sliders\\c786e16f-8e4f-4c95-995a-327bdc9f3acalogo.png"
+    },
+    {
+      "Identity": "C:\\Users\\User\\OneDrive\\Desktop\\Swift-Shop-BackEnd\\SwiftShop-Api\\wwwroot\\uploads\\store-datas\\0aa5277f-b31a-47ac-9e34-4c7773792410logo.png",
+      "SourceId": "SwiftShop-Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\OneDrive\\Desktop\\Swift-Shop-BackEnd\\SwiftShop-Api\\wwwroot\\",
+      "BasePath": "_content/SwiftShop-Api",
+      "RelativePath": "uploads/store-datas/0aa5277f-b31a-47ac-9e34-4c7773792410logo.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\store-datas\\0aa5277f-b31a-47ac-9e34-4c7773792410logo.png"
+    },
+    {
+      "Identity": "C:\\Users\\User\\OneDrive\\Desktop\\Swift-Shop-BackEnd\\SwiftShop-Api\\wwwroot\\uploads\\store-datas\\f7a1d956-c156-407a-a994-04e23625e27bemptyCart.png",
+      "SourceId": "SwiftShop-Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\OneDrive\\Desktop\\Swift-Shop-BackEnd\\SwiftShop-Api\\wwwroot\\",
+      "BasePath": "_content/SwiftShop-Api",
+      "RelativePath": "uploads/store-datas/f7a1d956-c156-407a-a994-04e23625e27bemptyCart.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\store-datas\\f7a1d956-c156-407a-a994-04e23625e27bemptyCart.png"
     }
   ]
 }

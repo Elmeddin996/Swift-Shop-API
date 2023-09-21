@@ -141,6 +141,17 @@ builder.Services.AddAuthentication(opt =>
 
 var app = builder.Build();
 
+app.UseStaticFiles();
+app.UseRouting();
+
+app.UseCors(builder =>
+{
+    builder
+    .AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader();
+});
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -148,9 +159,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseStaticFiles();
 app.MapControllers();
 app.UseMiddleware<ErrorHandlingMiddleware>();
 

@@ -9,6 +9,7 @@ namespace SwiftShop_Services.Dtos.StoreDataDto
         public string? Address { get; set; }
         public string? LogoText { get; set; }
         public string? CompanyName { get; set; }
+        public string? AboutCompany { get; set; }
         public string? WhatsappLink { get; set; }
         public string? InstagramLink { get; set; }
         public string? FacebookLink { get; set; }
