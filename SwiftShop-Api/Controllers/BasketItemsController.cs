@@ -23,7 +23,6 @@ namespace SwiftShop_API.Controllers
         }
 
         [HttpGet("all")]
-        [Authorize]
         public async Task<IActionResult> GetAll()
         {
             AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);

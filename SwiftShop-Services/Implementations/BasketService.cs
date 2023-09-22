@@ -72,7 +72,7 @@ namespace SwiftShop_Services.Implementations
 
         public void Delete(int id)
         {
-            var entity = _repository.Get(x => x.Id == id);
+            var entity = _repository.Get(x => x.ProductId == id);
 
             if (entity == null) throw new RestException(System.Net.HttpStatusCode.NotFound, "Item not found");
 

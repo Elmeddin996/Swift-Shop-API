@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SwiftShop_Services.Dtos.BrandDto;
 using SwiftShop_Services.Interfaces;
@@ -30,6 +31,7 @@ namespace SwiftShop_API.Controllers
         }
 
         [HttpPost("")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create(BrandPostDto postDto)
         {
             var result = _service.Create(postDto);
@@ -38,6 +40,7 @@ namespace SwiftShop_API.Controllers
 
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(int id, BrandPutDto putDto)
         {
             _service.Edit(id, putDto);
@@ -45,6 +48,7 @@ namespace SwiftShop_API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles ="Admin")]
         public IActionResult Delete(int id)
         {
             _service.Delete(id);

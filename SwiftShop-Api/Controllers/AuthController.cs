@@ -50,6 +50,7 @@ namespace SwiftShop_API.Controllers
             dto.Address = user.Address;
             dto.Phone = user.Phone;
             dto.Email = user.Email;
+            dto.EmailConfirm = user.EmailConfirmed;
 
             return Ok(dto);
         }
@@ -134,7 +135,10 @@ namespace SwiftShop_API.Controllers
             user.Address = dto.Address;
             user.Phone = dto.Phone;
 
-            var result = await _userManager.UpdateAsync(user);
+            if (!await _userManager.CheckPasswordAsync(user, dto.Password))
+                return BadRequest("Password is not correct");
+
+                var result = await _userManager.UpdateAsync(user);
 
                 
             if (result.Succeeded) return Ok("User Data Changed");
@@ -153,7 +157,7 @@ namespace SwiftShop_API.Controllers
            
             var newPass = await _userManager.ChangePasswordAsync(user, dto.Password, dto.NewPassword);
 
-            if (!newPass.Succeeded) return BadRequest();
+            if (!newPass.Succeeded) return BadRequest("test");
 
             return Ok();
         }

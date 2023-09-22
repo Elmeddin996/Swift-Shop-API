@@ -26,7 +26,7 @@ namespace SwiftShop_API.Controllers
             _configuration = configuration;
         }
 
-        [HttpGet("SendConfirmEmailToken")]
+        [HttpPost("SendConfirmEmailToken")]
         [Authorize]
         public async Task<IActionResult> CreateToken()
         {
@@ -50,6 +50,7 @@ namespace SwiftShop_API.Controllers
         }
 
         [HttpGet("confirmemail")]
+        [Authorize]
         public async Task<IActionResult> ConfirmEmail([FromQuery] string encodedToken, [FromQuery] string email)
         {
             string token = _tokenEncDec.DecodeToken(encodedToken);
@@ -68,7 +69,6 @@ namespace SwiftShop_API.Controllers
             var result = await _userManager.ConfirmEmailAsync(user, token);
             if (result.Succeeded)
             {
-                //return Redirect($"{Request.Scheme}://{Request.Host}/");
                 return Ok("Email confirmed successfully.");
             }
 
@@ -111,7 +111,7 @@ namespace SwiftShop_API.Controllers
 
             if (result)
             {
-                var reactAppUrl = _configuration["FrontUrl:BaseUrl"] + $"reset-password?token={token}&email={email}";
+                var reactAppUrl = _configuration["FrontUrl:BaseUrl"] + $"reset-password?token={encodedToken}&email={email}";
                 return Redirect(reactAppUrl);
             }
 
@@ -122,6 +122,8 @@ namespace SwiftShop_API.Controllers
         [HttpPost("ResetPasswordChange")]
         public async Task<IActionResult> ResetPassword(ResetPasswordPostDto dto)
         {
+            string token = _tokenEncDec.DecodeToken(dto.Token);
+
             if (dto.Password != dto.ConfirmPassword) return BadRequest("Password is don't match");
 
             var user = await _userManager.FindByEmailAsync(dto.Email);
@@ -131,7 +133,7 @@ namespace SwiftShop_API.Controllers
                 return BadRequest("Email is not correct");
             }
 
-            var result = await _userManager.ResetPasswordAsync(user, dto.Token, dto.Password);
+            var result = await _userManager.ResetPasswordAsync(user, token, dto.Password);
 
             if (!result.Succeeded)
             {
