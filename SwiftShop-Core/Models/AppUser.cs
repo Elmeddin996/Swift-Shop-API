@@ -10,5 +10,6 @@ namespace SwiftShop_Core.Models
         public string Phone { get; set; }
 
         public ICollection<BasketItem> BasketItems { get; set; }
+        public ICollection<Order> Orders { get; set; }
     }
 }

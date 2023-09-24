@@ -11,6 +11,7 @@ namespace SwiftShop_Data.Configurations
             builder.Property(x => x.Name).HasMaxLength(15).IsRequired(true);
             builder.Property(x => x.SalePrice).HasColumnType("money");
             builder.Property(x => x.CostPrice).HasColumnType("money");
+            builder.Property(x => x.DiscountPercent).HasColumnType("money");
         }
     }
 }

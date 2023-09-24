@@ -4,6 +4,7 @@ using SwiftShop_Core.Models;
 using SwiftShop_Services.Dtos.BasketItemDto;
 using SwiftShop_Services.Dtos.BrandDto;
 using SwiftShop_Services.Dtos.CategoryDto;
+using SwiftShop_Services.Dtos.OrderDto;
 using SwiftShop_Services.Dtos.ProductDto;
 using SwiftShop_Services.Dtos.SliderDto;
 using SwiftShop_Services.Dtos.StoreDataDto;
@@ -39,6 +40,12 @@ namespace SwiftShop_Services.Profiles
             CreateMap<SliderPutDto, Slider>();
             CreateMap<Slider, SliderGetByIdDto>();
             CreateMap<Slider, SliderGetDto>();
+
+            CreateMap<OrderPutDto, Order>();
+            CreateMap<Order, OrderGetByIdDto>();
+            CreateMap<Order, OrderGetDto>();
+
+            CreateMap<OrderItem, OrderItemInOrderDto>();
 
             CreateMap<BasketItemPostDto, BasketItem>();
             CreateMap<BasketItem, BasketItemGetDto>(); 
