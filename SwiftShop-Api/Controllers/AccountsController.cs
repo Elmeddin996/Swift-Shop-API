@@ -26,7 +26,7 @@ namespace SwiftShop_API.Controllers
             _configuration = configuration;
         }
 
-        [HttpPost("SendConfirmEmailToken")]
+        [HttpGet("SendConfirmEmailToken")]
         [Authorize]
         public async Task<IActionResult> CreateToken()
         {
@@ -42,37 +42,34 @@ namespace SwiftShop_API.Controllers
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 
             string encodedToken = _tokenEncDec.EncodeToken(token);
-            string confirmationLink = $"{Request.Scheme}://{Request.Host}/api/accounts/confirmemail?encodedToken={encodedToken}&email={user.Email}";
+            var reactAppUrl = _configuration["FrontUrl:BaseUrl"] + $"confirm-email?token={encodedToken}&email={user.Email}";
 
-            _emailSender.Send(user.Email, "Email Confirme", $"Click <a href=\"{confirmationLink}\">here</a> to verification your email");
+            _emailSender.Send(user.Email, "Email Confirme", $"Click <a href=\"{reactAppUrl}\">here</a> to verification your email");
 
             return Ok();
         }
 
-        [HttpGet("confirmemail")]
+        [HttpPost("confirmemail")]
         [Authorize]
-        public async Task<IActionResult> ConfirmEmail([FromQuery] string encodedToken, [FromQuery] string email)
+        public async Task<IActionResult> ConfirmEmail(ConfirmEmailDto dto)
         {
-            string token = _tokenEncDec.DecodeToken(encodedToken);
+            string token = _tokenEncDec.DecodeToken(dto.Token);
 
-            if (string.IsNullOrWhiteSpace(token) || string.IsNullOrWhiteSpace(email))
+            if (string.IsNullOrWhiteSpace(token) || string.IsNullOrWhiteSpace(dto.Email))
             {
                 return BadRequest("Token and email are required.");
             }
 
-            var user = await _userManager.FindByEmailAsync(email);
+            var user = await _userManager.FindByEmailAsync(dto.Email);
             if (user == null)
             {
                 return NotFound("User not found.");
             }
 
             var result = await _userManager.ConfirmEmailAsync(user, token);
-            if (result.Succeeded)
-            {
-                return Ok("Email confirmed successfully.");
-            }
+            
+             return Ok("Email confirmed successfully.");
 
-            return BadRequest(result.Errors);
         }
 
         [HttpPost("forgotpassword")]

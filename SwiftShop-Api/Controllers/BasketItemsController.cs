@@ -50,5 +50,15 @@ namespace SwiftShop_API.Controllers
             _service.Delete(id);
             return NoContent();
         }
+
+
+        [HttpDelete("deleteAll")]
+        public async Task<IActionResult> Delete() 
+        {
+            AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
+
+            _service.DeleteAll(user.Id);
+            return NoContent();
+        }
     }
 }

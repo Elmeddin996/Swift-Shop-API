@@ -14,5 +14,6 @@ namespace SwiftShop_Services.Interfaces
         void AddToBasket(BasketItemPostDto dto);
         List<BasketItemGetDto> GetAll(string userId);
         void Delete(int id);
+        void DeleteAll(string userId);
     }
 }

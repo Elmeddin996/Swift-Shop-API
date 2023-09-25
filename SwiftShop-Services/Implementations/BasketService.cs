@@ -80,6 +80,18 @@ namespace SwiftShop_Services.Implementations
             _repository.Commit();
         }
 
+        public void DeleteAll(string userId)
+        {
+            var entities = _repository.GetAll(x => x.UserId==userId).ToList();
+
+            if (entities == null) throw new RestException(System.Net.HttpStatusCode.NotFound, "Item not found");
+
+            foreach (var entity in entities)
+                _repository.Remove(entity);
+
+            _repository.Commit();
+        }
+
         public List<BasketItemGetDto> GetAll(string userId)
         {
             var entities = _repository.GetAll(x =>x.UserId==userId, "Product");
