@@ -12,7 +12,7 @@ namespace SwiftShop_Services.Interfaces
     public interface IBrandService
     {
         CreateEntityDto Create(BrandPostDto dto);
-        void Edit(int id, BrandPutDto dto);
+        void Edit(BrandPutDto dto);
         List<BrandGetDto> GetAll();
         BrandGetByIdDto GetById(int id);
         void Delete(int id);

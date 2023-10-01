@@ -5,10 +5,13 @@
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public string CategoryId { get; set; }
-        public string BrandId { get; set; }
+        public int CategoryId { get; set; }
+        public int BrandId { get; set; }
+        public int Rate { get; set; }
         public decimal SalePrice { get; set; }
         public decimal DiscountPercent { get; set; }
+        public int Stock { get; set; }
+
 
 
         public string ImageName { get; set; }

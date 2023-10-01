@@ -9,7 +9,7 @@ namespace SwiftShop_Services.Dtos.UserDto
         public string Email { get; set; }
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
-        public string Address { get; set; }
+        public string? Address { get; set; }
         public string Phone { get; set; }
 
     }
@@ -23,7 +23,7 @@ namespace SwiftShop_Services.Dtos.UserDto
             RuleFor(x => x.Password).NotEmpty().MinimumLength(6).MaximumLength(20);
             RuleFor(x => x.ConfirmPassword).Equal(x => x.Password).WithMessage("Passwords do not match");
             RuleFor(x => x.Email).NotEmpty().EmailAddress();
-            RuleFor(x => x.Address).NotEmpty().MaximumLength(100);
+            RuleFor(x => x.Address).MaximumLength(100);
             RuleFor(x => x.Phone)
                 .NotEmpty()
                 .Matches(@"^(\+\d{1,3})?\s?\d{11,13}$")

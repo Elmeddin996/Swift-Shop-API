@@ -41,11 +41,11 @@ namespace SwiftShop_API.Controllers
         }
 
 
-        [HttpPut("{id}")]
+        [HttpPut("Edit")]
         [Authorize(Roles = "Admin")]
-        public IActionResult Edit(int id, CategoryPutDto putDto)
+        public IActionResult Edit(CategoryPutDto putDto)
         {
-            _service.Edit(id, putDto);
+            _service.Edit(putDto);
             return NoContent();
         }
 

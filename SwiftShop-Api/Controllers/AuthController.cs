@@ -20,8 +20,9 @@ namespace SwiftShop_API.Controllers
         private readonly JwtService _jwtService;
         private readonly IEmailSender _emailSender;
         private readonly TokenEncoderDecoder _tokenEncDec;
+        private readonly IConfiguration _configuration;
 
-        public AuthController(SignInManager<AppUser> signInManager,  UserManager<AppUser> userManager, IHttpContextAccessor httpContextAccessor, RoleManager<IdentityRole> roleManager, JwtService jwtService, IEmailSender emailSender, TokenEncoderDecoder tokenEncDec)
+        public AuthController(SignInManager<AppUser> signInManager,  UserManager<AppUser> userManager, IHttpContextAccessor httpContextAccessor, RoleManager<IdentityRole> roleManager, JwtService jwtService, IEmailSender emailSender, TokenEncoderDecoder tokenEncDec, IConfiguration configuration)
         {
             _signInManager = signInManager;
             _userManager = userManager;
@@ -30,6 +31,7 @@ namespace SwiftShop_API.Controllers
             _jwtService = jwtService;
             _emailSender = emailSender;
             _tokenEncDec = tokenEncDec;
+            _configuration = configuration;
         }
 
 
@@ -44,13 +46,36 @@ namespace SwiftShop_API.Controllers
             if (user == null) return NotFound();
 
             UserGetDto dto = new UserGetDto();
-
+            dto.Id = user.Id;
             dto.FullName = user.FullName;
             dto.UserName = user.UserName;
             dto.Address = user.Address;
             dto.Phone = user.Phone;
             dto.Email = user.Email;
             dto.EmailConfirm = user.EmailConfirmed;
+            dto.IsAdmin = user.IsAdmin;
+
+            return Ok(dto);
+        }
+
+        [HttpGet("{id}")]
+        [Authorize]
+        public async Task<IActionResult> GetById(string id)
+        {
+
+            AppUser user = await _userManager.FindByIdAsync(id);
+
+            if (user == null) return NotFound();
+
+            UserGetDto dto = new UserGetDto();
+            dto.Id = user.Id;
+            dto.FullName = user.FullName;
+            dto.UserName = user.UserName;
+            dto.Address = user.Address;
+            dto.Phone = user.Phone;
+            dto.Email = user.Email;
+            dto.EmailConfirm = user.EmailConfirmed;
+            dto.IsAdmin = user.IsAdmin;
 
             return Ok(dto);
         }
@@ -69,11 +94,14 @@ namespace SwiftShop_API.Controllers
             {
                 UserGetDto dto = new UserGetDto
                 {
+                    Id = user.Id,
                     FullName = user.FullName,
                     UserName = user.UserName,
                     Address = user.Address,
                     Phone = user.Phone,
-                    Email = user.Email
+                    Email = user.Email,
+                    IsAdmin=user.IsAdmin,
+                    EmailConfirm=user.EmailConfirmed
                 };
 
                 userDtos.Add(dto);
@@ -111,9 +139,9 @@ namespace SwiftShop_API.Controllers
                 var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 
                 string encodedToken = _tokenEncDec.EncodeToken(token);
-                string confirmationLink = $"{Request.Scheme}://{Request.Host}/api/auth/confirmemail?encodedToken={encodedToken}&email={user.Email}";
+                var reactAppUrl = _configuration["FrontUrl:BaseUrl"] + $"confirm-email?token={encodedToken}&email={user.Email}";
 
-                _emailSender.Send(user.Email, "Email Confirme", $"Click <a href=\"{confirmationLink}\">here</a> to verification your email");
+                _emailSender.Send(user.Email, "Email Confirme", $"Click <a href=\"{reactAppUrl}\">here</a> to verification your email");
 
             }
             else
@@ -187,6 +215,33 @@ namespace SwiftShop_API.Controllers
             return Ok(responseData);
         }
 
+        [HttpPost("loginadmin")]
+        public async Task<IActionResult> LoginAsAdmin(UserLoginDto loginDto)
+        {
+            AppUser user = await _userManager.FindByEmailAsync(loginDto.Email);
+
+            if (user == null)
+                return Unauthorized();
+
+            if(!user.IsAdmin)
+                return Unauthorized();
+
+
+            if (!await _userManager.CheckPasswordAsync(user, loginDto.Password))
+                return Unauthorized();
+
+            var roles = await _userManager.GetRolesAsync(user);
+
+            var responseData = new
+            {
+                token = _jwtService.GenerateToken(user, roles),
+                userId = user.Id
+            };
+
+
+            return Ok(responseData);
+        }
+
 
         [HttpGet("Logout")]
         [Authorize]
@@ -197,7 +252,7 @@ namespace SwiftShop_API.Controllers
             return Ok();
         }
 
-        [HttpDelete("DeleteUser")]
+        [HttpDelete("{email}")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(string email)
         {
@@ -225,7 +280,8 @@ namespace SwiftShop_API.Controllers
         //    {
         //        UserName = "Admin",
         //        FullName = "Elmeddin Mirzeyev",
-        //        Email = "admin@gmail.com"
+        //        Email = "admin@gmail.com",
+        //        IsAdmin=true
         //    };
 
         //    await _userManager.CreateAsync(user, "Admin123");

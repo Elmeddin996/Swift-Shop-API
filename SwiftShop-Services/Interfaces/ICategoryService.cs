@@ -12,7 +12,7 @@ namespace SwiftShop_Services.Interfaces
     public interface ICategoryService
     {
         CreateEntityDto Create(CategoryPostDto dto);
-        void Edit(int id, CategoryPutDto dto);
+        void Edit(CategoryPutDto dto);
         List<CategoryGetDto> GetAll();
         CategoryGetByIdDto GetById(int id);
         void Delete(int id);

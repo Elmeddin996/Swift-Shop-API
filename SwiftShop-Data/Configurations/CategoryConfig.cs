@@ -8,7 +8,7 @@ namespace SwiftShop_Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Category> builder)
         {
-            builder.Property(x => x.Name).IsRequired(true).HasMaxLength(20);
+            builder.Property(x => x.Name).IsRequired(true).HasMaxLength(25);
         }
     }
 }

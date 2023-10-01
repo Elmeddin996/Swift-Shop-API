@@ -12,7 +12,7 @@ namespace SwiftShop_Services    .Dtos.CategoryDto
     {
         public CategoryPostValidator()
         {
-            RuleFor(x => x.Name).NotEmpty().WithMessage("Name cannot be empty!").MaximumLength(15).WithMessage("Maximum length should be 15!");
+            RuleFor(x => x.Name).NotEmpty().WithMessage("Name cannot be empty!").MaximumLength(25).WithMessage("Maximum length should be 25!");
         }
     }
 

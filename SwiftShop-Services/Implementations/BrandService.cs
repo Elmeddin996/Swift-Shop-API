@@ -47,14 +47,14 @@ namespace SwiftShop_Services.Implementations
             _repository.Commit();
         }
 
-        public void Edit(int id, BrandPutDto dto)
+        public void Edit(BrandPutDto dto)
         {
-            var entity = _repository.Get(x => x.Id == id);
+            var entity = _repository.Get(x => x.Id == dto.Id);
 
             if (entity == null) throw new RestException(System.Net.HttpStatusCode.NotFound, "Entity not found");
 
-            if (entity.Name != dto.Name && _repository.IsExist(x => x.Name == dto.Name))
-                throw new RestException(System.Net.HttpStatusCode.BadRequest, "Name", "Name is already exist");
+            if (_repository.IsExist(x => x.Name == dto.Name))
+                throw new RestException(System.Net.HttpStatusCode.OK, "Name", "Name is already exist");
 
             entity.Name = dto.Name;
             _repository.Commit();

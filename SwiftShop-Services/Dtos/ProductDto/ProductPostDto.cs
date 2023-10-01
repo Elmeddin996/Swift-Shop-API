@@ -8,11 +8,13 @@ namespace SwiftShop_Services.Dtos.ProductDto
 
         public int CategoryId { get; set; }
         public int BrandId { get; set; }
+        public int Rate { get; set; }
         public string Name { get; set; }
         public decimal SalePrice { get; set; }
         public decimal CostPrice { get; set; }
         public string Description { get; set; }
         public decimal DiscountPercent { get; set; }
+        public int Stock { get; set; }
 
 
         public IFormFile PosterImageFile { get; set; }
