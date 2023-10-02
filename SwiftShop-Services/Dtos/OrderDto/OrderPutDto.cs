@@ -10,6 +10,7 @@ namespace SwiftShop_Services.Dtos.OrderDto
 {
     public class OrderPutDto
     {
+        public int Id { get; set; }
         public OrderStatus Status { get; set; }
     }
 }

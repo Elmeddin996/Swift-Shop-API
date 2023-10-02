@@ -21,11 +21,13 @@ namespace SwiftShop_Services.Implementations
     {
         private readonly IOrderRepository _repository;
         private readonly IMapper _mapper;
+        private readonly IProductRepository _productRepo;
 
-        public OrderService( IOrderRepository repository, IMapper mapper)
+        public OrderService( IOrderRepository repository, IMapper mapper, IProductRepository productRepo)
         {
             _repository = repository;
             _mapper = mapper;
+            _productRepo = productRepo;
         }
         public CreateEntityDto Create(OrderPostDto dto)
         {
@@ -47,6 +49,7 @@ namespace SwiftShop_Services.Implementations
                 {
                     OrderId = entity.Id,
                     ProductId = orderItemDto.ProductId,
+                    ProductName = orderItemDto.ProductName,
                     Count = orderItemDto.Count,
                 };
 
@@ -69,16 +72,30 @@ namespace SwiftShop_Services.Implementations
             _repository.Commit();
         }
 
-        public void Edit(int id, OrderPutDto dto)
+        public void Edit(OrderPutDto dto)
         {
-            var entity = _repository.Get(x => x.Id == id);
+            var entity = _repository.Get(x => x.Id == dto.Id,"OrderItems");
 
             if (entity == null) throw new RestException(System.Net.HttpStatusCode.NotFound, "Entity not found");
            
             entity.Status = dto.Status;
+            
+            if (dto.Status == OrderStatus.Accepted)
+            {
+                foreach (var orderItem in entity.OrderItems)
+                {
+                    var product = _productRepo.Get(x => x.Id == orderItem.ProductId);
 
+                    if (product.Stock >= orderItem.Count)
+                    {
+                        product.Stock -= orderItem.Count;
+                    }
 
+                    _productRepo.Commit();
+                }
+            }
 
+         
             _repository.Commit();
         }
 

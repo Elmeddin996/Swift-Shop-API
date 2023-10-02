@@ -65,14 +65,14 @@ namespace SwiftShop_API.Controllers
 
 
 
-        [HttpPut("{id}")]
+        [HttpPut("Edit")]
         [Authorize(Roles = "Admin")]
-        public IActionResult Edit(int id, OrderPutDto putDto)
+        public IActionResult Edit(OrderPutDto putDto)
         {
 
-            _service.Edit(id, putDto);
+            _service.Edit(putDto);
 
-            Order order = _repository.Get(x => x.Id == id);
+            Order order = _repository.Get(x => x.Id == putDto.Id);
 
             if (putDto.Status==OrderStatus.Accepted)
             {

@@ -8,7 +8,8 @@ namespace SwiftShop_Services.Dtos.OrderDto
 {
     public class OrderItemDto
     {
-        public int ProductId { get; set; }
+        public int ProductId { get; set; }  
+        public string ProductName { get; set; }
         public int Count { get; set; }
     }
 }

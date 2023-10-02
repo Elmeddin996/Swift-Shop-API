@@ -8,7 +8,7 @@ namespace SwiftShop_Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Product> builder)
         {
-            builder.Property(x => x.Name).HasMaxLength(15).IsRequired(true);
+            builder.Property(x => x.Name).HasMaxLength(25).IsRequired(true);
             builder.Property(x => x.Stock).IsRequired(true);
             builder.Property(x => x.SalePrice).HasColumnType("money");
             builder.Property(x => x.CostPrice).HasColumnType("money");

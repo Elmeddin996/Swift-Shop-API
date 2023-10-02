@@ -25,7 +25,7 @@ namespace SwiftShop_Services.Dtos.ProductDto
     {
         public ProductPostDtoValidator()
         {
-            RuleFor(x => x.Name).NotEmpty().MaximumLength(15).MinimumLength(2);
+            RuleFor(x => x.Name).NotEmpty().MaximumLength(25).MinimumLength(2);
             RuleFor(x => x.SalePrice).GreaterThanOrEqualTo(x => x.CostPrice);
             RuleFor(x => x.CostPrice).GreaterThanOrEqualTo(0);
             RuleFor(x => x.PosterImageFile).NotNull();
@@ -45,14 +45,18 @@ namespace SwiftShop_Services.Dtos.ProductDto
 
             RuleFor(x => x).Custom((x, context) =>
             {
-
+                if (x != null && x.PosterImageFile != null)
+                {
                 if (x.PosterImageFile.Length > 2097152)
                     context.AddFailure(nameof(x.PosterImageFile), "ImageFile must be less or equal than 2MB");
 
                 if (x.PosterImageFile.ContentType != "image/jpeg" && x.PosterImageFile.ContentType != "image/png")
                     context.AddFailure(nameof(x.PosterImageFile), "ImageFile must be image/jpeg or image/png");
 
+                }
 
+                if (x != null && x.ImageFiles != null)
+                { 
                 foreach (var img in x.ImageFiles)
                 {
                     if (img.Length > 2097152)
@@ -61,6 +65,8 @@ namespace SwiftShop_Services.Dtos.ProductDto
                     if (img.ContentType != "image/jpeg" && img.ContentType != "image/png")
                         context.AddFailure(nameof(img), "ImageFile must be image/jpeg or image/png");
                 }
+                }
+                
             });
 
         }

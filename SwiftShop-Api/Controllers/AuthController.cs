@@ -257,6 +257,8 @@ namespace SwiftShop_API.Controllers
         public async Task<IActionResult> Delete(string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
+
+            if(!user.IsAdmin)
             await _userManager.DeleteAsync(user);
 
             return Ok();
