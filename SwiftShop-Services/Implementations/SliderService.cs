@@ -32,7 +32,7 @@ namespace SwiftShop_Services.Implementations
             if (_repository.IsExist(x => x.Title == dto.Title))
                 errors.Add(new RestExceptionError("Title", "Title is already exists"));
 
-            if (errors.Count > 0) throw new RestException(System.Net.HttpStatusCode.BadRequest, errors);
+            if (errors.Count > 0) throw new RestException(System.Net.HttpStatusCode.Conflict, errors);
 
             var entity = _mapper.Map<Slider>(dto);
 
@@ -61,9 +61,9 @@ namespace SwiftShop_Services.Implementations
             FileManager.Delete(rootPath, "uploads/sliders", entity.ImageName);
         }
 
-        public void Edit(int id, SliderPutDto dto)
+        public void Edit(SliderPutDto dto)
         {
-            var entity = _repository.Get(x => x.Id == id);
+            var entity = _repository.Get(x => x.Id == dto.Id);
 
             if (entity == null) throw new RestException(System.Net.HttpStatusCode.NotFound, "Slider not found");
 

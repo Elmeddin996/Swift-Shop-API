@@ -47,26 +47,26 @@ namespace SwiftShop_Services.Dtos.ProductDto
             {
                 if (x != null && x.PosterImageFile != null)
                 {
-                if (x.PosterImageFile.Length > 2097152)
-                    context.AddFailure(nameof(x.PosterImageFile), "ImageFile must be less or equal than 2MB");
+                    if (x.PosterImageFile.Length > 2097152)
+                        context.AddFailure(nameof(x.PosterImageFile), "ImageFile must be less or equal than 2MB");
 
-                if (x.PosterImageFile.ContentType != "image/jpeg" && x.PosterImageFile.ContentType != "image/png")
-                    context.AddFailure(nameof(x.PosterImageFile), "ImageFile must be image/jpeg or image/png");
+                    if (x.PosterImageFile.ContentType != "image/jpeg" && x.PosterImageFile.ContentType != "image/png")
+                        context.AddFailure(nameof(x.PosterImageFile), "ImageFile must be image/jpeg or image/png");
 
                 }
 
                 if (x != null && x.ImageFiles != null)
-                { 
-                foreach (var img in x.ImageFiles)
                 {
-                    if (img.Length > 2097152)
-                        context.AddFailure(nameof(img), "ImageFile must be less or equal than 2MB");
+                    foreach (var img in x.ImageFiles)
+                    {
+                        if (img.Length > 2097152)
+                            context.AddFailure(nameof(img), "ImageFile must be less or equal than 2MB");
 
-                    if (img.ContentType != "image/jpeg" && img.ContentType != "image/png")
-                        context.AddFailure(nameof(img), "ImageFile must be image/jpeg or image/png");
+                        if (img.ContentType != "image/jpeg" && img.ContentType != "image/png")
+                            context.AddFailure(nameof(img), "ImageFile must be image/jpeg or image/png");
+                    }
                 }
-                }
-                
+
             });
 
         }

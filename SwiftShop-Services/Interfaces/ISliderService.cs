@@ -11,7 +11,7 @@ namespace SwiftShop_Services.Interfaces
     public interface ISliderService
     {
         CreateEntityDto Create(SliderPostDto dto);
-        void Edit(int id, SliderPutDto dto);
+        void Edit(SliderPutDto dto);
         SliderGetByIdDto GetById(int id);
         List<SliderGetDto> GetAll();
         void Delete(int id);

@@ -7,6 +7,7 @@ namespace SwiftShop_Services.Dtos.ProductDto
     public class ProductPutDto
     {
 
+        public int Id { get; set; }
         public int CategoryId { get; set; }
         public int BrandId { get; set; }
         public int Rate { get; set; }
@@ -19,7 +20,7 @@ namespace SwiftShop_Services.Dtos.ProductDto
 
 
 
-        public IFormFile PosterImageFile { get; set; }
+        public IFormFile? PosterImageFile { get; set; }
         public List<IFormFile>? ImageFiles { get; set; }
     }
 
@@ -27,7 +28,7 @@ namespace SwiftShop_Services.Dtos.ProductDto
     {
         public ProductPutDtoValidator()
         {
-            RuleFor(x => x.Name).NotEmpty().MaximumLength(15).MinimumLength(2);
+            RuleFor(x => x.Name).NotEmpty().MaximumLength(25).MinimumLength(2);
             RuleFor(x => x.SalePrice).GreaterThanOrEqualTo(x => x.CostPrice);
             RuleFor(x => x.CostPrice).GreaterThanOrEqualTo(0);
             RuleFor(x => x.DiscountPercent).GreaterThanOrEqualTo(0).LessThanOrEqualTo(100);
@@ -46,13 +47,16 @@ namespace SwiftShop_Services.Dtos.ProductDto
 
             RuleFor(x => x).Custom((x, context) =>
             {
+                if (x.PosterImageFile!=null)
+                {
 
-                if (x.PosterImageFile.Length > 2097152)
-                    context.AddFailure(nameof(x.PosterImageFile), "ImageFile must be less or equal than 2MB");
+                    if (x.PosterImageFile.Length > 2097152)
+                        context.AddFailure(nameof(x.PosterImageFile), "ImageFile must be less or equal than 2MB");
 
-                if (x.PosterImageFile.ContentType != "image/jpeg" && x.PosterImageFile.ContentType != "image/png")
-                    context.AddFailure(nameof(x.PosterImageFile), "ImageFile must be image/jpeg or image/png");
+                    if (x.PosterImageFile.ContentType != "image/jpeg" && x.PosterImageFile.ContentType != "image/png")
+                        context.AddFailure(nameof(x.PosterImageFile), "ImageFile must be image/jpeg or image/png");
 
+                }
 
                 if (x.ImageFiles != null)
                 {

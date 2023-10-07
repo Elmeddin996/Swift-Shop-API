@@ -31,6 +31,13 @@ namespace SwiftShop_API.Controllers
             return Ok(_service.GetById(id));
         }
 
+        [HttpGet("GetAdmin/{id}")]
+        [Authorize(Roles = "Admin")]
+        public ActionResult GetAdmin(int id)
+        {
+            return Ok(_service.GetByIdAdmin(id));
+        }
+
 
 
         [HttpPost("")]
@@ -40,11 +47,11 @@ namespace SwiftShop_API.Controllers
             return StatusCode(201, _service.Create(dto));
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("Edit")]
         [Authorize(Roles = "Admin")]
-        public ActionResult Update(int id, [FromForm] ProductPutDto dto)
+        public ActionResult Update([FromForm] ProductPutDto dto)
         {
-            _service.Edit(id, dto);
+            _service.Edit(dto);
 
             return NoContent();
         }

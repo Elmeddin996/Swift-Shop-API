@@ -93,9 +93,9 @@ namespace SwiftShop_Services.Implementations
             }
         }
 
-        public void Edit(int id, ProductPutDto dto)
+        public void Edit(ProductPutDto dto)
         {
-            var entity = _repository.Get(x => x.Id == id, "ProductImages","Brand","Category");
+            var entity = _repository.Get(x => x.Id == dto.Id, "ProductImages","Brand","Category");
 
             List<RestExceptionError> errors = new List<RestExceptionError>();
 
@@ -119,9 +119,12 @@ namespace SwiftShop_Services.Implementations
                 postImg.ImageUrl= "/uploads/products/"+ postImg.ImageName;
             }
 
-
-            var removedImages = entity.ProductImages.FindAll(x => x.PosterStatus == false);
+                 var removedImages = entity.ProductImages.FindAll(x => x.PosterStatus == false);
+            if (dto.ImageFiles!=null)
+            {
             entity.ProductImages.RemoveAll(x => x.PosterStatus == false);
+            }
+           
 
             if (dto.ImageFiles != null)
             {
@@ -144,6 +147,8 @@ namespace SwiftShop_Services.Implementations
             entity.BrandId = dto.BrandId;
             entity.CategoryId = dto.CategoryId;
             entity.Name = dto.Name;
+            entity.Stock = dto.Stock;
+            entity.Rate = dto.Rate;
             entity.Description = dto.Description;
 
             _repository.Commit();
@@ -151,11 +156,14 @@ namespace SwiftShop_Services.Implementations
 
             if (oldPoster != null) FileManager.Delete(rootPath, "uploads/products", oldPoster);
 
-             foreach (var img in removedImages)
-             {
+            if (dto.ImageFiles!=null)
+            {
+                foreach (var img in removedImages)
+                {
                     FileManager.Delete(rootPath, "uploads/products", img.ImageName);
-             }
-            
+                }
+            }
+
         }
 
         public List<ProductGetDto> GetAll()
@@ -190,6 +198,32 @@ namespace SwiftShop_Services.Implementations
             dto.ImageNames = entity.ProductImages?.Select(image => image.ImageName).ToList();
             dto.ImageUrls = entity.ProductImages?.Select(image =>baseUrl+ image.ImageUrl).ToList();
 
+            return dto;
+        }
+
+        public ProductGetByIdAdminDto GetByIdAdmin(int id)
+        {
+            var entity = _repository.Get(x => x.Id == id, "ProductImages", "Category", "Brand");
+
+            if (entity == null) throw new RestException(System.Net.HttpStatusCode.NotFound, "Product not found");
+
+            var dto = _mapper.Map<ProductGetByIdAdminDto>(entity);
+            string baseUrl = $"{_httpContextAccessor.HttpContext.Request.Scheme}://{_httpContextAccessor.HttpContext.Request.Host}";
+            dto.ImageNames = entity.ProductImages
+             ?.Where(image => image.PosterStatus == false)
+              .Select(image => image.ImageName).ToList();
+
+            dto.ImageUrls = entity.ProductImages
+              ?.Where(image => image.PosterStatus == false)
+               .Select(image => baseUrl + image.ImageUrl).ToList();
+
+            var posterImage = entity.ProductImages?.SingleOrDefault(image => image.PosterStatus == true);
+
+            if (posterImage != null)
+            {
+                dto.ImageName = posterImage.ImageName;
+                dto.ImageUrl = baseUrl + posterImage.ImageUrl;
+            }
             return dto;
         }
     }

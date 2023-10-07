@@ -15,7 +15,6 @@ namespace SwiftShop_Services.Dtos.StoreDataDto
         public string? FacebookLink { get; set; }
         public string? LinkedinLink { get; set; }
         public IFormFile? LogoImageFile { get; set; }
-        public IFormFile? EmptyBasketImageFile { get; set; }
     }
 
     public class StoreDataPutDtoValidator : AbstractValidator<StoreDataPutDto>
@@ -32,18 +31,6 @@ namespace SwiftShop_Services.Dtos.StoreDataDto
                     .Must(contentType => contentType == "image/jpeg" || contentType == "image/png")
                     .WithMessage("LogoImageFile must be image/jpeg or image/png");
             });
-
-            When(x => x.EmptyBasketImageFile != null, () =>
-            {
-                RuleFor(x => x.EmptyBasketImageFile.Length)
-                    .LessThanOrEqualTo(2097152)
-                    .WithMessage("EmptyBasketImageFile must be less or equal than 2MB");
-
-                RuleFor(x => x.EmptyBasketImageFile.ContentType)
-                    .Must(contentType => contentType == "image/jpeg" || contentType == "image/png")
-                    .WithMessage("EmptyBasketImageFile must be image/jpeg or image/png");
-            });
-
         }
     }
 }

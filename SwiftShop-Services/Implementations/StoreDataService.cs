@@ -68,7 +68,6 @@ namespace SwiftShop_Services.Implementations
             }
 
             string? oldLogoImgName = null;
-            string? oldEmptyBasketImgName = null;
             string rootPath = Directory.GetCurrentDirectory() + "/wwwroot";
 
             if(dto.LogoImageFile!=null)
@@ -78,16 +77,9 @@ namespace SwiftShop_Services.Implementations
               entity.LogoImageLink = "/uploads/store-datas/" + entity.LogoImageName;
             }
 
-            if(dto.EmptyBasketImageFile!=null)
-            {
-              oldEmptyBasketImgName = entity.EmptyBasketImageName;
-              entity.EmptyBasketImageName = FileManager.Save(dto.EmptyBasketImageFile, rootPath, "uploads/store-datas");
-              entity.EmptyBasketImageLink = "/uploads/store-datas/" + entity.EmptyBasketImageName;
-            }
             _repository.Commit();
 
             if (oldLogoImgName != null) FileManager.Delete(rootPath, "uploads/store-datas", oldLogoImgName);
-            if (oldEmptyBasketImgName != null) FileManager.Delete(rootPath, "uploads/store-datas", oldEmptyBasketImgName);
         }
 
         public StoreDataGetDto Get()

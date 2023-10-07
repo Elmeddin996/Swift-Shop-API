@@ -40,11 +40,11 @@ namespace SwiftShop_API.Controllers
 
       
 
-        [HttpPut("{id}")]
+        [HttpPut("Edit")]
         [Authorize(Roles = "Admin")]
-        public ActionResult Update(int id, [FromForm] SliderPutDto dto)
+        public ActionResult Update([FromForm] SliderPutDto dto)
         {
-            _service.Edit(id, dto);
+            _service.Edit(dto);
 
             return NoContent();
         }

@@ -16,8 +16,10 @@ namespace SwiftShop_Services.Profiles
     {
         public MapperProfile(IHttpContextAccessor accessor)
         {
+            
 
             CreateMap<Product, ProductGetByIdDto>();
+            CreateMap<Product, ProductGetByIdAdminDto>();
             CreateMap<Product, ProductGetDto>();
             CreateMap<ProductPostDto, Product>();
             CreateMap<Product, ProductPutDto>();

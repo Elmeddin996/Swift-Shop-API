@@ -15,7 +15,7 @@ namespace SwiftShop_Services.Dtos.SliderDto
     {
         public SliderPostDtoValidator()
         {
-            RuleFor(x => x.Title).NotEmpty().MaximumLength(15).MinimumLength(2);
+            RuleFor(x => x.Title).NotEmpty().MaximumLength(20).MinimumLength(2);
             RuleFor(x => x.ImageFile).NotNull();
 
             RuleFor(x => x).Custom((x, context) =>
