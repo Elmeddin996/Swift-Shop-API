@@ -24,8 +24,8 @@ namespace SwiftShop_Services.Dtos.StoreDataDto
             When(x => x.LogoImageFile != null, () =>
             {
                 RuleFor(x => x.LogoImageFile.Length)
-                    .LessThanOrEqualTo(2097152)
-                    .WithMessage("LogoImageFile must be less or equal than 2MB");
+                    .LessThanOrEqualTo(6291456)
+                    .WithMessage("LogoImageFile must be less or equal than 6MB");
 
                 RuleFor(x => x.LogoImageFile.ContentType)
                     .Must(contentType => contentType == "image/jpeg" || contentType == "image/png")

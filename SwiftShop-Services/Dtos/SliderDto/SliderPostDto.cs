@@ -15,13 +15,13 @@ namespace SwiftShop_Services.Dtos.SliderDto
     {
         public SliderPostDtoValidator()
         {
-            RuleFor(x => x.Title).NotEmpty().MaximumLength(20).MinimumLength(2);
+            RuleFor(x => x.Title).NotEmpty().MaximumLength(30).MinimumLength(2);
             RuleFor(x => x.ImageFile).NotNull();
 
             RuleFor(x => x).Custom((x, context) =>
             {
-                if (x.ImageFile.Length > 2097152)
-                    context.AddFailure(nameof(x.ImageFile), "ImageFile must be less or equal than 2MB");
+                if (x.ImageFile.Length > 6291456)
+                    context.AddFailure(nameof(x.ImageFile), "ImageFile must be less or equal than 6MB");
 
                 if (x.ImageFile.ContentType != "image/jpeg" && x.ImageFile.ContentType != "image/png")
                     context.AddFailure(nameof(x.ImageFile), "ImageFile must be image/jpeg or image/png");

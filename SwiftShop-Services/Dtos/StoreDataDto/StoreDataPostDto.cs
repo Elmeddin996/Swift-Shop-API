@@ -24,8 +24,8 @@ namespace SwiftShop_Services.Dtos.StoreDataDto
         {
             RuleFor(x => x).Custom((x, context) =>
             {
-                if (x.LogoImageFile.Length > 2097152)
-                    context.AddFailure(nameof(x.LogoImageFile), "ImageFile must be less or equal than 2MB");
+                if (x.LogoImageFile.Length > 6291456)
+                    context.AddFailure(nameof(x.LogoImageFile), "ImageFile must be less or equal than 6MB");
 
                 if (x.LogoImageFile.ContentType != "image/jpeg" && x.LogoImageFile.ContentType != "image/png")
                     context.AddFailure(nameof(x.LogoImageFile), "ImageFile must be image/jpeg or image/png");

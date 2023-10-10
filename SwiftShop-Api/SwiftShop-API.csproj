@@ -21,7 +21,6 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\uploads\products\" />
-    <Folder Include="wwwroot\uploads\sliders\" />
   </ItemGroup>
 
   <ItemGroup>

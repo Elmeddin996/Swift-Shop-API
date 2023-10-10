@@ -8,9 +8,9 @@ namespace SwiftShop_Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Slider> builder)
         {
-            builder.Property(x => x.Title).HasMaxLength(20).IsRequired(false);
+            builder.Property(x => x.Title).HasMaxLength(30).IsRequired(false);
             builder.Property(x => x.Desc).HasMaxLength(150).IsRequired(false);
-            builder.Property(x => x.ImageName).HasMaxLength(100).IsRequired(true);
+            builder.Property(x => x.ImageName).HasMaxLength(100).IsRequired(false);
         }
     }
 }
